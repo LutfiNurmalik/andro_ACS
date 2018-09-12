@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -48,6 +49,7 @@ public class Classification extends ListActivity {
 
     Button button;
     TextView text;
+    EditText editText;
 
     // Progress Dialog
     private ProgressDialog pDialog_class;
