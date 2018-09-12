@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@android:color/white"-->
+    <!--tools:context=".Classification">-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/bg_gambar_coba2"
+    tools:context=".Classification">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="CLASSIFICATION AND LABEL MARKING"
+        android:textAlignment="center"
+        android:textColor="@color/blackdop"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:cacheColorHint="@color/blackdop"
+            android:id="@android:id/list"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:id="@+id/appBar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorAccent"-->
+        <!--android:minHeight="?attr/actionBarSize">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:minHeight="?attr/actionBarSize"-->
+            <!--app:theme="@style/AppTheme"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+
+        <!--</android.support.v7.widget.Toolbar>-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <!--&lt;!&ndash; Menerapkan TabLayout dan ViewPager &ndash;&gt;-->
+
+    <!--<android.support.design.widget.TabLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/tab_layout"-->
+        <!--android:layout_below="@id/appBar"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--app:tabTextColor="#FFFFFF"-->
+        <!--app:tabGravity="center"-->
+        <!--app:tabMode="scrollable"-->
+        <!--app:tabSelectedTextColor="#FFFFFF">-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class1"-->
+            <!--android:text="Class 1"-->
+            <!--android:icon="@drawable/ic_page_class1"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class2"-->
+            <!--android:text="Class 2"-->
+            <!--android:icon="@drawable/ic_page_class2"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class3"-->
+            <!--android:text="Class 3"-->
+            <!--android:icon="@drawable/ic_page_class3"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class4"-->
+            <!--android:text="Class 4"-->
+            <!--android:icon="@drawable/ic_page_class4"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class5"-->
+            <!--android:text="Class 5"-->
+            <!--android:icon="@drawable/ic_page_class5"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class6"-->
+            <!--android:text="Class 6"-->
+            <!--android:icon="@drawable/ic_page_class6"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class7"-->
+            <!--android:text="Class 7"-->
+            <!--android:icon="@drawable/ic_page_class7"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class8"-->
+            <!--android:text="Class 8"-->
+            <!--android:icon="@drawable/ic_page_class8"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_class9"-->
+            <!--android:text="Class 9"-->
+            <!--android:icon="@drawable/ic_page_class9"/>-->
+
+        <!--<android.support.design.widget.TabItem-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/tab_marking"-->
+            <!--android:text="handling Label"-->
+            <!--android:icon="@drawable/ic_page_marking"/>-->
+
+
+    <!--</android.support.design.widget.TabLayout>-->
+
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/pager"-->
+        <!--android:layout_below="@id/tab_layout">-->
+
+    <!--</android.support.v4.view.ViewPager>-->
+
+
+<!--</RelativeLayout>-->
