@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -42,6 +43,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Classification extends ListActivity {
+
+
+    Button button;
 
     // Progress Dialog
     private ProgressDialog pDialog_class;
