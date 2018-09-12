@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.regulasiudara.aircargoshippingguidelines.classification.Class1;
@@ -46,6 +47,7 @@ public class Classification extends ListActivity {
 
 
     Button button;
+    TextView text;
 
     // Progress Dialog
     private ProgressDialog pDialog_class;
