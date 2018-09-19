@@ -23,54 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Coba" />
-        <activity android:name=".Limitationcountry" />
-        <activity android:name=".Limitationairline" />
-        <activity android:name=".Informationsegregation" />
-        <activity android:name=".Informationairlinelimitation" />
-        <activity android:name=".Informationcountrylimitation" />
-        <!-- <activity android:name=".Frag_Class1" /> -->
-        <!-- <activity android:name=".Frag_Class2" /> -->
-        <!-- <activity android:name=".Frag_Class3" /> -->
-        <!-- <activity android:name=".Frag_Class4" /> -->
-        <!-- <activity android:name=".Frag_Class5" /> -->
-        <!-- <activity android:name=".Frag_Class6" /> -->
-        <!-- <activity android:name=".Frag_Class7" /> -->
-        <!-- <activity android:name=".Frag_Class8" /> -->
-        <!-- <activity android:name=".Frag_Class9" /> -->
-        <!-- <activity android:name=".Frag_Marking" /> -->
-        <activity android:name=".Classification" />
         <activity android:name=".Registrasi" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Login" />
-        <activity android:name=".Viewdataweb" />
-        <activity android:name=".Fragmentcontact" />
-        <activity android:name=".classification.Class1" />
-        <activity android:name=".classification.Class2" />
-        <activity android:name=".classification.Class3" />
-        <activity android:name=".classification.Class4" />
-        <activity android:name=".classification.Class5" />
-        <activity android:name=".classification.Class6" />
-        <activity android:name=".classification.Class7" />
-        <activity android:name=".classification.Class8" />
-        <activity android:name=".classification.Class9" />
-        <activity android:name=".classification.Marking" />
-        <activity android:name=".Contact" />
-        <activity android:name=".packing.Pi219" />
-        <activity android:name=".packing.Pi101" />
-        <activity android:name=".packing.Piy956" />
-        <activity android:name=".packing.Pi114" />
-        <activity android:name=".packing.Piy964" />
-        <activity android:name=".lim_country.Peru" />
-        <activity android:name=".lim_country.Spain" />
-        <activity android:name=".lim_country.Poland" />
-        <activity android:name=".lim_country.Nepal" />
-        <activity android:name=".lim_country.Ukraine" />
-        <activity android:name=".lim_airline.Virginia" />
-        <activity android:name=".lim_airline.Tnt" />
-        <activity android:name=".lim_airline.Philair" />
-        <activity android:name=".lim_airline.Jetstar" />
-        <activity android:name=".lim_airline.Czechair"></activity>
+        <activity android:name=".DangerousGoodsAct" />
+        <activity android:name=".ClassificationAct" />
+        <activity android:name=".SegregationAct" />
+        <activity android:name=".Artikel_Classification" />
+        <activity android:name=".PackingInstructionAct" />
+        <activity android:name=".ArtikelPackingInstruction"></activity>
     </application>
 
 </manifest>

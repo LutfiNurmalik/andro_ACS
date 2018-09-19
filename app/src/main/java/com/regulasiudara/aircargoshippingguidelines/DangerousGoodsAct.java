@@ -2,47 +2,49 @@ package com.regulasiudara.aircargoshippingguidelines;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    //private String urlJsonObj = "https://duniasehat.000webhostapp.com/artikel.php";
+public class DangerousGoodsAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    //private String urlJsonObj = "http://192.168.2.103/dbpariwisata/getlist_segregation.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
-    private Context context = MainActivity.this;
+    private Context context = DangerousGoodsAct.this;
     List<ArticleModel> articleModelList;
-//    private ProgressDialog pDialog;
-    private static String TAG = MainActivity.class.getSimpleName();
+    private ProgressDialog pDialog;
+    private static String TAG = DangerousGoodsAct.class.getSimpleName();
     TextView judul, subJudul;
     ImageView header;
     public boolean isOnline() {
@@ -54,10 +56,12 @@ public class MainActivity extends AppCompatActivity
         }
         return true;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_dangerous_goods);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -68,13 +72,17 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
-        judul = (TextView) findViewById(R.id.judul);
-        header = (ImageView) findViewById(R.id.header);
+        Button bclass = (Button)findViewById(R.id.pindah_classification);
+        bclass.setOnClickListener(this);
+        Button bsegre = (Button)findViewById(R.id.pindah_segregation);
+        bsegre.setOnClickListener(this);
+
 //        pDialog = new ProgressDialog(this);
 //        pDialog.setMessage("Please wait...");
 //        pDialog.setCancelable(false);
-        //showpDialog();
-        //makeJsonObjectRequest();
+//        showpDialog();
+//
+//        makeJsonObjectRequest();
     }
 //    private void makeJsonObjectRequest() {
 //        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -88,36 +96,30 @@ public class MainActivity extends AppCompatActivity
 //                    for (int i = 0; i < result.length(); i++) {
 //                        JSONObject c = result.getJSONObject(i);
 //                        ArticleModel articleData = new ArticleModel();
-//                        articleData.id = c.getInt("id");
 //                        articleData.judul = c.getString("judul");
-//                        articleData.gambar = c.getString("gambar");
-//                        articleData.isi = c.getString("isi");
-//                        articleData.sumber = c.getString("sumber");
-//                        articleData.kategori = c.getString("kategori");
+//                        articleData.link = c.getString("link");
+//                        articleData.konten = c.getString("konten");
 //                        articleModelList.add(articleData);
 //                    }
-//                    recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//                    adapter = new ArticleAdapter(articleModelList, context);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-//                    recyclerView.setAdapter(adapter);
-//                    recyclerView.addOnItemTouchListener(new CustomTouchListener(context, new onItemClickListener() {
-//                        @Override
-//                        public void onClick(View view, int index) {
-//                            Intent intent = new Intent(context, ArticleActivity.class);
-//                            intent.putExtra("judul", articleModelList.get(index).judul);
-//                            intent.putExtra("isi", articleModelList.get(index).isi);
-//                            intent.putExtra("gambar", articleModelList.get(index).gambar);
-//                            intent.putExtra("sumber", articleModelList.get(index).sumber);
-//                            intent.putExtra("kategori", articleModelList.get(index).kategori);
-//                            context.startActivity(intent);
-//                        }
-//                    }));
+////                    recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+////                    adapter = new ArticleAdapter(articleModelList, context);
+////                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+////                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+////                    recyclerView.setAdapter(adapter);
+////                    recyclerView.addOnItemTouchListener(new CustomTouchListener(context, new onItemClickListener() {
+////                        @Override
+////                        public void onClick(View view, int index) {
+////                            Intent intent = new Intent(context, Artikel_Classification.class);
+////                            intent.putExtra("judul", articleModelList.get(index).judul);
+////                            intent.putExtra("konten", articleModelList.get(index).konten);
+////                            context.startActivity(intent);
+////                        }
+////                    }));
 //                }
-//                catch (Exception e) {
+//                catch (JSONException e) {
 //                    e.printStackTrace();
 //                    Toast.makeText(getApplicationContext(),
-//                            "Error: Periksa Koneksi Anda",
+//                            "Error: " + e.getMessage(),
 //                            Toast.LENGTH_LONG).show();
 //                }
 //                hidepDialog();
@@ -126,38 +128,24 @@ public class MainActivity extends AppCompatActivity
 //        }, new Response.ErrorListener() {
 //            @Override
 //            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: Periksa Koneksi Anda");
-//                Toast.makeText(getApplicationContext(),
-//                        error.getMessage(), Toast.LENGTH_SHORT).show();
 //                hidepDialog();
 //                isOnline();
 //            }
 //        });
 //        AppController.getInstance().addToRequestQueue(jsonObjReq);
 //    }
+
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder keluar = new AlertDialog.Builder(MainActivity.this);
-        keluar.setMessage("Anda yakin mau keluar?").setCancelable(false)
-                .setPositiveButton("Ya", new AlertDialog.OnClickListener(){
-                    public void onClick(DialogInterface arg0, int arg1){
-                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }
-                }).setNegativeButton("Tidak", new AlertDialog.OnClickListener(){
-            public void onClick(DialogInterface dialog, int arg1){
-                dialog.cancel();
-            }
-        });
-        AlertDialog dialog1 = keluar.create();
-        dialog1.setTitle("Keluar");
-        dialog1.show();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -165,8 +153,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            //Intent intent6 = new Intent(MainActivity.this, AboutUsActivity.class);
-           //startActivity(intent6);
+//            Intent intent6 = new Intent(DangerousGoodsAct.this, AboutUsActivity.class);
+//            startActivity(intent6);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -176,30 +164,29 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
+                Intent intent1 = new Intent(DangerousGoodsAct.this, MainActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.nav_dg:
-                Intent intent2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
-                startActivity(intent2);
                 break;
 //            case R.id.nav_psn:
-//                Intent intent3 = new Intent(MainActivity.this, OlahragaActivity.class);
+//                Intent intent3 = new Intent(DangerousGoodsAct.this, OlahragaActivity.class);
 //                startActivity(intent3);
-//                finish();
 //                break;
             case R.id.nav_pi:
-                Intent intent4 = new Intent(MainActivity.this, PackingInstructionAct.class);
+                Intent intent4 = new Intent(DangerousGoodsAct.this, PackingInstructionAct.class);
                 startActivity(intent4);
                 break;
 //            case R.id.nav_limitation:
-//                Intent intent5 = new Intent(MainActivity.this, GayahidupActivity.class);
+//                Intent intent5 = new Intent(DangerousGoodsAct.this, GayahidupActivity.class);
 //                startActivity(intent5);
 //                break;
-//            case R.id.nav_contact:
-//                Intent intent6 = new Intent(MainActivity.this, AboutUsActivity.class);
+//            case R.id.nav_about:
+//                Intent intent6 = new Intent(DangerousGoodsAct.this, AboutUsActivity.class);
 //                startActivity(intent6);
 //                break;
-//            case R.id.nav_about:
-//                Intent intent7 = new Intent(MainActivity.this, BmiCalcActivity.class);
+//            case R.id.nav_contact:
+//                Intent intent7 = new Intent(DangerousGoodsAct.this, BmiCalcActivity.class);
 //                startActivity(intent7);
 //                break;
         }
@@ -207,6 +194,23 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.pindah_classification:
+                Intent moveClass = new Intent(DangerousGoodsAct.this, ClassificationAct.class);
+                startActivity(moveClass);
+                break;
+
+            case R.id.pindah_segregation:
+                Intent moveSegre = new Intent(DangerousGoodsAct.this, SegregationAct.class);
+                startActivity(moveSegre);
+                break;
+        }
+    }
+
 //    private void showpDialog() {
 //        if (!pDialog.isShowing())
 //            pDialog.show();
