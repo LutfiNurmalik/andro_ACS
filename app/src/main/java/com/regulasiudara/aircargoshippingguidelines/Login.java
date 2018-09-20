@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
         username = sharedpreferences.getString(TAG_USERNAME, null);
 
         if (session) {
-            Intent intent = new Intent(Login.this, MainActivity.class); //ini kemana larinya
+            Intent intent = new Intent(Login.this, MainActivity.class);
             intent.putExtra(TAG_USERNAME, username);
             finish();
             startActivity(intent);

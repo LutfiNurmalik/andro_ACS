@@ -27,25 +27,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" UN ID"
-        android:layout_marginTop="20sp"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:textSize="20sp"
-        android:hint="UN ID"
-        android:textColor="@color/blackdop"
-        android:padding="10sp"
-        android:id="@+id/un_id"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text=" Proper Shipping Name"
         android:layout_marginTop="20dp"
         android:textColor="#fff"
@@ -89,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txt_psn"
+            android:textAlignment="center"
             android:layout_marginTop="10dp"
             android:textSize="40dp"
             android:textColor="#fff"

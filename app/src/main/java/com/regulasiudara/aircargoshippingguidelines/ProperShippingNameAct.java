@@ -60,7 +60,6 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
 
-        unID = (EditText) findViewById(R.id.un_id);
         etPSN = (EditText) findViewById(R.id.et_psn);
         tcari = (Button) findViewById(R.id.tcari);
 
@@ -81,7 +80,6 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
             @Override
             public void onClick(View view) {
 
-                unid = unID.getText().toString().trim();
                 psn = etPSN.getText().toString().trim();
 
                 getSqlDetails();
@@ -90,7 +88,7 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
     }
     private void getSqlDetails() {
 
-        String url= "http://192.168.2.103/dbpariwisata/getlist_psn.php";
+        String url= "http://192.168.2.103/dbpariwisata/getlist_psn.php?psn="+psn;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
@@ -100,22 +98,23 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
 
                             JSONArray jsonarray = new JSONArray(response);
 
+
                             for(int i=0; i < jsonarray.length(); i++) {
 
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
 
 
-                                String un_id = jsonobject.getString("un_id");
-                                String psn = jsonobject.getString("psn");
-                                String classPsn = jsonobject.getString("class");
-                                String hazard = jsonobject.getString("hazard");
-                                String pg = jsonobject.getString("pg");
-                                String pa_pi = jsonobject.getString("pa_pi");
-                                String pa_net_qty = jsonobject.getString("pa_net_qty");
-                                String cao_pi = jsonobject.getString("cao_pi");
-                                String cao_net_qty = jsonobject.getString("cao_net_qty");
-                                String sp = jsonobject.getString("sp");
-                                String erg = jsonobject.getString("erg");
+                                String un_id = jsonobject.getString("un_id").trim();
+                                String psn = jsonobject.getString("psn").trim();
+                                String classPsn = jsonobject.getString("class").trim();
+                                String hazard = jsonobject.getString("hazard").trim();
+                                String pg = jsonobject.getString("pg").trim();
+                                String pa_pi = jsonobject.getString("pa_pi").trim();
+                                String pa_net_qty = jsonobject.getString("pa_net_qty").trim();
+                                String cao_pi = jsonobject.getString("cao_pi").trim();
+                                String cao_net_qty = jsonobject.getString("cao_net_qty").trim();
+                                String sp = jsonobject.getString("sp").trim();
+                                String erg = jsonobject.getString("erg").trim();
 
                                 txtunID.setText(un_id);
                                 txtpsn.setText(psn);
@@ -148,87 +147,6 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
     }
-
-//    private void sendRequest(){
-//
-//        StringRequest stringRequest = new StringRequest(JSON_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        showJSON(response);
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(ProperShippingNameAct.this,error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        requestQueue.add(stringRequest);
-//
-//    }
-//
-//    public void showJSON(String json){
-//        String un_id="";
-//        String psn="";
-//        String classPsn="";
-//        String hazard= "";
-//        String pg="";
-//        String pa_pi="";
-//        String pa_net_qty="";
-//        String cao_pi="";
-//        String cao_net_qty="";
-//        String sp="";
-//        String erg="";
-//
-//        try {
-//            JSONObject jsonObject = new JSONObject(json);
-//
-//            JSONArray result = jsonObject.getJSONArray("result");
-//
-//            if (result.length() < 1){
-//                Toast.makeText(ProperShippingNameAct.this, "Kode tidak ditemukan", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            JSONObject Data = result.getJSONObject(0);
-//
-//            un_id = Data.getString("un_id");
-//            psn = Data.getString("psn");
-//            classPsn = Data.getString("class");
-//            hazard = Data.getString("hazard");
-//            pg = Data.getString("pg");
-//            pa_pi = Data.getString("pa_pi");
-//            pa_net_qty = Data.getString("pa_net_qty");
-//            cao_pi = Data.getString("cao_pi");
-//            cao_net_qty = Data.getString("cao_net_qty");
-//            sp = Data.getString("sp");
-//            erg = Data.getString("erg");
-//
-//            Intent halamanpsn = new Intent(ProperShippingNameAct.this, TampilPSN.class);
-//
-//
-//            halamanpsn.putExtra("un_id",un_id);
-//            halamanpsn.putExtra("psn", psn);
-//            halamanpsn.putExtra("class", classPsn);
-//            halamanpsn.putExtra("hazard", hazard);
-//            halamanpsn.putExtra("pg", pg);
-//            halamanpsn.putExtra("pa_pi", pa_pi);
-//            halamanpsn.putExtra("pa_net_qty", pa_net_qty);
-//            halamanpsn.putExtra("cao_pi", cao_pi);
-//            halamanpsn.putExtra("cao_net_qty", cao_net_qty);
-//            halamanpsn.putExtra("sp", sp);
-//            halamanpsn.putExtra("erg", erg);
-//
-//            startActivity(halamanpsn);
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
 
     @Override
     public void onBackPressed() {
@@ -263,7 +181,7 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
                 startActivity(intent1);
                 break;
             case R.id.nav_dg:
-                Intent intent2 = new Intent(ProperShippingNameAct.this, MainActivity.class);
+                Intent intent2 = new Intent(ProperShippingNameAct.this, DangerousGoodsAct.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_psn:
