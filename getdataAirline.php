@@ -8,7 +8,7 @@ $response = array();
 // mysqli_select_db("dbregulations");
  
 //  get by classification
-
+//hai
 class usr {}
 $result = mysqli_query($con, "SELECT judul FROM tbl_lim_airline WHERE 1") or die(mysqli_error());
  
