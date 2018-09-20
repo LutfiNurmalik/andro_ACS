@@ -31,15 +31,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassificationAct extends AppCompatActivity {
+public class LimCountry extends AppCompatActivity {
 
-    private String urlJsonObj = "http://192.168.2.103/dbpariwisata/getlist_classification.php";
+    private String urlJsonObj = "http://192.168.2.103/dbpariwisata/getlist_country.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
-    private Context context = ClassificationAct.this;
+    private Context context = LimCountry.this;
     List<ArticleModel> articleModelList;
     private ProgressDialog pDialog;
-    private static String TAG = ClassificationAct.class.getSimpleName();
+    private static String TAG = LimCountry.class.getSimpleName();
     TextView judul;
     ImageView header;
     public boolean isOnline() {
@@ -55,7 +55,8 @@ public class ClassificationAct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_classification);
+        setContentView(R.layout.activity_lim_country);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         articleModelList = new ArrayList<>();
@@ -90,7 +91,7 @@ public class ClassificationAct extends AppCompatActivity {
                     recyclerView.addOnItemTouchListener(new CustomTouchListener(context, new onItemClickListener() {
                         @Override
                         public void onClick(View view, int index) {
-                            Intent intent = new Intent(context, Artikel_Classification.class);
+                            Intent intent = new Intent(context, ArtikelLimCountry.class);
                             intent.putExtra("judul", articleModelList.get(index).judul);
                             intent.putExtra("konten", articleModelList.get(index).konten);
                             context.startActivity(intent);

@@ -18,6 +18,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         ViewHolder(View itemView){
             super(itemView);
             headerItem = (TextView) itemView.findViewById(R.id.headerItem);
+            gambarItem = (ImageView) itemView.findViewById(R.id.gambarItem);
         }
     }
     public ArticleAdapter(List<ArticleModel> list, Context context){
@@ -33,6 +34,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     @Override
     public void onBindViewHolder(ArticleAdapter.ViewHolder holder, int position) {
         holder.headerItem.setText(list.get(position).judul);
+        holder.headerItem.setText(list.get(position).link);
     }
     @Override
     public int getItemCount() {

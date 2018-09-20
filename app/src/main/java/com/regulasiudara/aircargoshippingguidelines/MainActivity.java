@@ -69,72 +69,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
         judul = (TextView) findViewById(R.id.judul);
-        header = (ImageView) findViewById(R.id.header);
-//        pDialog = new ProgressDialog(this);
-//        pDialog.setMessage("Please wait...");
-//        pDialog.setCancelable(false);
-        //showpDialog();
-        //makeJsonObjectRequest();
     }
-//    private void makeJsonObjectRequest() {
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                urlJsonObj, null, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d(TAG, response.toString());
-//                try {
-//                    JSONArray result = response.getJSONArray("result");
-//                    for (int i = 0; i < result.length(); i++) {
-//                        JSONObject c = result.getJSONObject(i);
-//                        ArticleModel articleData = new ArticleModel();
-//                        articleData.id = c.getInt("id");
-//                        articleData.judul = c.getString("judul");
-//                        articleData.gambar = c.getString("gambar");
-//                        articleData.isi = c.getString("isi");
-//                        articleData.sumber = c.getString("sumber");
-//                        articleData.kategori = c.getString("kategori");
-//                        articleModelList.add(articleData);
-//                    }
-//                    recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//                    adapter = new ArticleAdapter(articleModelList, context);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-//                    recyclerView.setAdapter(adapter);
-//                    recyclerView.addOnItemTouchListener(new CustomTouchListener(context, new onItemClickListener() {
-//                        @Override
-//                        public void onClick(View view, int index) {
-//                            Intent intent = new Intent(context, ArticleActivity.class);
-//                            intent.putExtra("judul", articleModelList.get(index).judul);
-//                            intent.putExtra("isi", articleModelList.get(index).isi);
-//                            intent.putExtra("gambar", articleModelList.get(index).gambar);
-//                            intent.putExtra("sumber", articleModelList.get(index).sumber);
-//                            intent.putExtra("kategori", articleModelList.get(index).kategori);
-//                            context.startActivity(intent);
-//                        }
-//                    }));
-//                }
-//                catch (Exception e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getApplicationContext(),
-//                            "Error: Periksa Koneksi Anda",
-//                            Toast.LENGTH_LONG).show();
-//                }
-//                hidepDialog();
-//                isOnline();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: Periksa Koneksi Anda");
-//                Toast.makeText(getApplicationContext(),
-//                        error.getMessage(), Toast.LENGTH_SHORT).show();
-//                hidepDialog();
-//                isOnline();
-//            }
-//        });
-//        AppController.getInstance().addToRequestQueue(jsonObjReq);
-//    }
+
     @Override
     public void onBackPressed() {
         AlertDialog.Builder keluar = new AlertDialog.Builder(MainActivity.this);
@@ -181,19 +117,19 @@ public class MainActivity extends AppCompatActivity
                 Intent intent2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
                 startActivity(intent2);
                 break;
-//            case R.id.nav_psn:
-//                Intent intent3 = new Intent(MainActivity.this, OlahragaActivity.class);
-//                startActivity(intent3);
-//                finish();
-//                break;
+            case R.id.nav_psn:
+                Intent intent3 = new Intent(MainActivity.this, ProperShippingNameAct.class);
+                startActivity(intent3);
+                finish();
+                break;
             case R.id.nav_pi:
                 Intent intent4 = new Intent(MainActivity.this, PackingInstructionAct.class);
                 startActivity(intent4);
                 break;
-//            case R.id.nav_limitation:
-//                Intent intent5 = new Intent(MainActivity.this, GayahidupActivity.class);
-//                startActivity(intent5);
-//                break;
+            case R.id.nav_limitation:
+                Intent intent5 = new Intent(MainActivity.this, LimitationAct.class);
+                startActivity(intent5);
+                break;
 //            case R.id.nav_contact:
 //                Intent intent6 = new Intent(MainActivity.this, AboutUsActivity.class);
 //                startActivity(intent6);

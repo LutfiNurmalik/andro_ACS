@@ -31,7 +31,14 @@
         <activity android:name=".SegregationAct" />
         <activity android:name=".Artikel_Classification" />
         <activity android:name=".PackingInstructionAct" />
-        <activity android:name=".ArtikelPackingInstruction"></activity>
+        <activity android:name=".ArtikelPackingInstruction" />
+        <activity android:name=".LimitationAct" />
+        <activity android:name=".LimCountry" />
+        <activity android:name=".ArtikelLimCountry" />
+        <activity android:name=".LimAirline" />
+        <activity android:name=".ArtikelLimAirline" />
+        <activity android:name=".ProperShippingNameAct" />
+        <activity android:name=".TampilPSN"></activity>
     </application>
 
 </manifest>

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal">
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/ic_nav_dg"/>
+        android:background="@drawable/ic_nav_limitation"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,7 +16,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/blackdop"
-        android:text="Dangerous Goods"/>
+        android:text="Limitation"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -25,23 +24,23 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginTop="40dp"
-        android:text="@string/isi_dg"
         android:textAlignment="center"
+        android:text="@string/isi_dg"
         android:textSize="15sp"
         android:textColor="@color/blackdop"
         />
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="17sp"
         android:background="#fff"
         android:textColor="@color/blackdop"
-        android:text="Classification and Label Marking"
-        android:id="@+id/pindah_classification"/>
+        android:text="Limitation Country"
+        android:id="@+id/pindah_limCountry"/>
 
     <Button
         android:layout_width="match_parent"
@@ -52,9 +51,8 @@
         android:layout_marginBottom="30dp"
         android:textSize="17sp"
         android:textColor="@color/blackdop"
-        android:text="Segregation"
+        android:text="Limitation Airlines"
         android:background="#fff"
-        android:id="@+id/pindah_segregation"/>
-
+        android:id="@+id/pindah_limAirlines"/>
 
 </LinearLayout>

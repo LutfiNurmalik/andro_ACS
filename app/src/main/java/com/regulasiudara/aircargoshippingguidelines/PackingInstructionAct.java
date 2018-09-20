@@ -72,7 +72,6 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
         judul = (TextView) findViewById(R.id.judul);
-        header = (ImageView) findViewById(R.id.header);
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
@@ -166,16 +165,16 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
                 Intent intent2 = new Intent(PackingInstructionAct.this, DangerousGoodsAct.class);
                 startActivity(intent2);
                 break;
-//            case R.id.nav_psn:
-//                Intent intent3 = new Intent(DangerousGoodsAct.this, OlahragaActivity.class);
-//                startActivity(intent3);
-//                break;
+            case R.id.nav_psn:
+                Intent intent3 = new Intent(PackingInstructionAct.this, ProperShippingNameAct.class);
+                startActivity(intent3);
+                break;
             case R.id.nav_pi:
                 break;
-//            case R.id.nav_limitation:
-//                Intent intent5 = new Intent(DangerousGoodsAct.this, GayahidupActivity.class);
-//                startActivity(intent5);
-//                break;
+            case R.id.nav_limitation:
+                Intent intent5 = new Intent(PackingInstructionAct.this, LimitationAct.class);
+                startActivity(intent5);
+                break;
 //            case R.id.nav_about:
 //                Intent intent6 = new Intent(DangerousGoodsAct.this, AboutUsActivity.class);
 //                startActivity(intent6);

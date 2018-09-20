@@ -31,15 +31,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassificationAct extends AppCompatActivity {
+public class LimAirline extends AppCompatActivity {
 
-    private String urlJsonObj = "http://192.168.2.103/dbpariwisata/getlist_classification.php";
+    private String urlJsonObj = "http://192.168.2.103/dbpariwisata/getlist_airline.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
-    private Context context = ClassificationAct.this;
+    private Context context = LimAirline.this;
     List<ArticleModel> articleModelList;
     private ProgressDialog pDialog;
-    private static String TAG = ClassificationAct.class.getSimpleName();
+    private static String TAG = LimAirline.class.getSimpleName();
     TextView judul;
     ImageView header;
     public boolean isOnline() {
@@ -55,7 +55,7 @@ public class ClassificationAct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_classification);
+        setContentView(R.layout.activity_lim_airline);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         articleModelList = new ArrayList<>();
@@ -64,6 +64,7 @@ public class ClassificationAct extends AppCompatActivity {
         pDialog.setCancelable(false);
         showpDialog();
         makeJsonObjectRequest();
+
     }
     private void makeJsonObjectRequest() {
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -77,7 +78,6 @@ public class ClassificationAct extends AppCompatActivity {
                     for (int i = 0; i < result.length(); i++) {
                         JSONObject c = result.getJSONObject(i);
                         ArticleModel articleData = new ArticleModel();
-                        articleData.judul = c.getString("judul");
                         articleData.link = c.getString("link");
                         articleData.konten = c.getString("konten");
                         articleModelList.add(articleData);
@@ -90,8 +90,8 @@ public class ClassificationAct extends AppCompatActivity {
                     recyclerView.addOnItemTouchListener(new CustomTouchListener(context, new onItemClickListener() {
                         @Override
                         public void onClick(View view, int index) {
-                            Intent intent = new Intent(context, Artikel_Classification.class);
-                            intent.putExtra("judul", articleModelList.get(index).judul);
+                            Intent intent = new Intent(context, ArtikelLimAirline.class);
+                            intent.putExtra("link", articleModelList.get(index).link);
                             intent.putExtra("konten", articleModelList.get(index).konten);
                             context.startActivity(intent);
                         }
