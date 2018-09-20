@@ -40,6 +40,7 @@
         <activity android:name=".ProperShippingNameAct" />
         <activity android:name=".TampilPSN"></activity>
         <activity android:name=".AboutAct"></activity>
+        <activity android:name=".ContactAct"></activity>
     </application>
 
 </manifest>

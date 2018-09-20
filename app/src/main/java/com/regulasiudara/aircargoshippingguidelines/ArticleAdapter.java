@@ -13,7 +13,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     List<ArticleModel> list;
     Context context;
     class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView headerItem, sumber;
+        public TextView headerItem;
         public ImageView gambarItem;
         ViewHolder(View itemView){
             super(itemView);

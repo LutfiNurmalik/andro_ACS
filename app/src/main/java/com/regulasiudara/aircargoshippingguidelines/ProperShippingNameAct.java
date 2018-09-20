@@ -148,7 +148,7 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
         String getUNID = unID.getText().toString();
         String getPSN = etPSN.getText().toString();
 
-        JSON_URL =  "http://192.168.43.225/test/getlist_pi.php/"+getUNID+"."+getPSN;
+        JSON_URL =  "http://192.168.2.103/dbpariwisata/getlist_pi.php/"+getUNID+"."+getPSN;
 
         Toast.makeText(ProperShippingNameAct.this, getUNID+getPSN, Toast.LENGTH_LONG );
 
@@ -205,17 +205,18 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
                 Intent intent5 = new Intent(ProperShippingNameAct.this, LimitationAct.class);
                 startActivity(intent5);
                 break;
-            case R.id.nav_about:
-                Intent intent6 = new Intent(ProperShippingNameAct.this, AboutAct.class);
-                startActivity(intent6);
-                break;
-            case R.id.nav_contact:
-                Intent intent7 = new Intent(ProperShippingNameAct.this, ContactAct.class);
-                startActivity(intent7);
-                break;
+//            case R.id.nav_about:
+//                Intent intent6 = new Intent(DangerousGoodsAct.this, AboutUsActivity.class);
+//                startActivity(intent6);
+//                break;
+//            case R.id.nav_contact:
+//                Intent intent7 = new Intent(DangerousGoodsAct.this, BmiCalcActivity.class);
+//                startActivity(intent7);
+//                break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }
+
