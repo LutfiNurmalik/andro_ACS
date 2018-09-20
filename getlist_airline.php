@@ -1,38 +1,27 @@
 <?php
 
-include_once "koneksi.php";
+define('HOST','localhost');
+define('USER','root');
+define('PASS','');
+define('DB','dbregulations');
+ 
+$con = mysqli_connect(HOST,USER,PASS,DB);
 
-$response = array();
-// // include db connect class
-// mysqli_connect("localhost","root","");
-// mysqli_select_db("dbregulations");
+$sql = "select link, konten from tbl_lim_airline";
  
-//  get by classification
-
-class usr {}
-$result = mysqli_query($con, "SELECT link FROM tbl_lim_airline WHERE 1") or die(mysqli_error());
+$res = mysqli_query($con,$sql);
  
-// cek
-if (mysqli_num_rows($result) > 0) {
-    // looping hasil
-    // classification node
-    $response["data"] = array();
-     
-    while ($row = mysqli_fetch_array($result)) {
-        $airline = array();
-        $airline["judul"] = $row[0];
-        // masukan classification pada $response
-        array_push($response["data"], $airline);
-    }
-    // sukses
-    $response["success"] = 1;
+$result = array();
  
-    // echo JSON response
-    echo json_encode($response);
-} else {
-    $response["success"] = 0;
-    $response["message"] = "Tidak ada data yang ditemukan";
- 
-    echo json_encode($response);
+while($row = mysqli_fetch_array($res)){
+array_push($result,
+array('link'=>$row[0],
+'konten'=>$row[1]
+));
 }
+ 
+echo json_encode(array("result"=>$result));
+ 
+mysqli_close($con);
+ 
 ?>
