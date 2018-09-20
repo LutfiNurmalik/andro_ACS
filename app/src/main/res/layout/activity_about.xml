@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".ContactAct"
+    tools:context=".AboutAct"
     tools:openDrawer="start"
     android:orientation="vertical">
 
     <include
-        layout="@layout/app_bar_contact"
+        layout="@layout/app_bar_about"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

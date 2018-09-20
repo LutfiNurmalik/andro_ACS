@@ -2,48 +2,37 @@ package com.regulasiudara.aircargoshippingguidelines;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    //private String urlJsonObj = "https://duniasehat.000webhostapp.com/artikel.php";
+public class AboutAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
+
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
-    private Context context = MainActivity.this;
+    private Context context = AboutAct.this;
     List<ArticleModel> articleModelList;
-//    private ProgressDialog pDialog;
-    private static String TAG = MainActivity.class.getSimpleName();
-    TextView judul, subJudul;
+    private ProgressDialog pDialog;
+    private static String TAG = AboutAct.class.getSimpleName();
+    TextView judul;
     ImageView header;
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -54,10 +43,12 @@ public class MainActivity extends AppCompatActivity
         }
         return true;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_about);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -68,82 +59,75 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
-        judul = (TextView) findViewById(R.id.judul);
     }
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder keluar = new AlertDialog.Builder(MainActivity.this);
-        keluar.setMessage("Anda yakin mau keluar?").setCancelable(false)
-                .setPositiveButton("Ya", new AlertDialog.OnClickListener(){
-                    public void onClick(DialogInterface arg0, int arg1){
-                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }
-                }).setNegativeButton("Tidak", new AlertDialog.OnClickListener(){
-            public void onClick(DialogInterface dialog, int arg1){
-                dialog.cancel();
-            }
-        });
-        AlertDialog dialog1 = keluar.create();
-        dialog1.setTitle("Keluar");
-        dialog1.show();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.action_settings) {
-            //Intent intent6 = new Intent(MainActivity.this, AboutUsActivity.class);
-           //startActivity(intent6);
+//            Intent intent6 = new Intent(PackingInstructionAct.this, AboutUsActivity.class);
+//            startActivity(intent6);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
+                Intent intent1 = new Intent(AboutAct.this, MainActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.nav_dg:
-                Intent intent2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
+                Intent intent2 = new Intent(AboutAct.this, DangerousGoodsAct.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_psn:
-                Intent intent3 = new Intent(MainActivity.this, ProperShippingNameAct.class);
+                Intent intent3 = new Intent(AboutAct.this, ProperShippingNameAct.class);
                 startActivity(intent3);
-                finish();
                 break;
             case R.id.nav_pi:
-                Intent intent4 = new Intent(MainActivity.this, PackingInstructionAct.class);
+                Intent intent4 = new Intent(AboutAct.this, PackingInstructionAct.class);
                 startActivity(intent4);
                 break;
             case R.id.nav_limitation:
-                Intent intent5 = new Intent(MainActivity.this, LimitationAct.class);
+                Intent intent5 = new Intent(AboutAct.this, LimitationAct.class);
                 startActivity(intent5);
                 break;
             case R.id.nav_about:
-                Intent intent6 = new Intent(MainActivity.this, AboutAct.class);
-                startActivity(intent6);
                 break;
             case R.id.nav_contact:
-                Intent intent7 = new Intent(MainActivity.this, ContactAct.class);
+                Intent intent7 = new Intent(AboutAct.this, ContactAct.class);
                 startActivity(intent7);
                 break;
-
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
 //    private void showpDialog() {
 //        if (!pDialog.isShowing())
 //            pDialog.show();
@@ -152,4 +136,5 @@ public class MainActivity extends AppCompatActivity
 //        if (pDialog.isShowing())
 //            pDialog.dismiss();
 //    }
+
 }

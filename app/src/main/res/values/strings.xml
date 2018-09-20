@@ -628,6 +628,16 @@
         2018 \n
     </string>
 
+    <string name="contact">
+        Please Contact Us on : \n\n
+
+        (021) 5677754 /n
+        contact@dgregulations.com \n
+        www.dgregulations.com \n\n
+
+        Or you can send message us below : \n\n
+    </string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

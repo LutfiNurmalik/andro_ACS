@@ -5,12 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".ContactAct"
-    tools:openDrawer="start"
-    android:orientation="vertical">
+    tools:context=".LimitationAct">
 
     <include
-        layout="@layout/app_bar_contact"
+        layout="@layout/app_bar_limitation"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

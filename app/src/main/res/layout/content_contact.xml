@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/judul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:text="Contact"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:textColor="#000"
+        android:text="@string/contact"
+        android:textAlignment="center"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="150sp"
+        android:layout_marginTop="20sp"
+        android:textSize="15sp"
+        android:textColor="#000"
+        android:id="@+id/txt_pesan"
+        />
+
+    <Button
+        android:layout_width="300sp"
+        android:layout_height="50sp"
+        android:layout_marginTop="20sp"
+        android:text="SEND MESSAGE"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:id="@+id/btn_contact"/>
+
+</LinearLayout>
