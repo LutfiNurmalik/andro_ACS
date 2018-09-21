@@ -21,81 +21,96 @@
             android:text="REGISTRATION"
             android:textAlignment="center"
             android:textColor="@color/blackdop"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             />
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_lastfirstname"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="  First Name"
                     android:id="@+id/txt_firstname"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_lastfirstname"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="  Last Name"
                     android:id="@+id/txt_lastname"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_mail"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -103,27 +118,33 @@
                     android:hint="  Email"
                     android:id="@+id/txt_email"
                     android:inputType="textEmailAddress"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_phone"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -131,52 +152,64 @@
                     android:hint="  Telephone"
                     android:id="@+id/txt_phone"
                     android:inputType="number"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_birth"
                 />
 
             <EditText
                 android:layout_width="240dp"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:hint="  Tanggal"
                 android:id="@+id/txt_tanggal"
                 android:inputType="date"
+                android:textSize="15sp"
+                android:textColor="#212121"
+                android:background="#fff"
                 />
 
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="5dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:id="@+id/btn_tanggal"
                 android:src="@drawable/ic_select_date"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_gender"
                 />
@@ -190,22 +223,25 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_address"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -213,82 +249,99 @@
                     android:hint="  Address"
                     android:id="@+id/txt_address"
                     android:inputType="textMultiLine"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_institution"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="  Institution"
                     android:id="@+id/txt_institution"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_username"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp">
-
+                android:layout_height="50dp">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="  Username"
                     android:id="@+id/txt_usernameregis"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_pass"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 app:passwordToggleEnabled="true">
 
                 <EditText
@@ -297,29 +350,34 @@
                     android:hint="  Password"
                     android:id="@+id/txt_passwordregis"
                     android:inputType="textPassword"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_reg_pass"
                 />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 app:passwordToggleEnabled="true">
-
 
                 <EditText
                     android:layout_width="match_parent"
@@ -327,20 +385,26 @@
                     android:hint="  Confirm Password"
                     android:id="@+id/txt_confirmpasswordregis"
                     android:inputType="textPassword"
+                    android:textSize="15sp"
+                    android:textColor="#212121"
+                    android:background="#fff"
                     />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <CheckBox
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/persetujuan"
@@ -362,6 +426,8 @@
             android:layout_marginBottom="30dp"
             android:text="SUBMIT"
             android:id="@+id/btn_registrasi"
+            android:textSize="15sp"
+            android:background="#fff"
             />
 
     </LinearLayout>

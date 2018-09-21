@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/ic_nav_dg"/>
 
@@ -17,7 +18,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/blackdop"
-        android:text="Dangerous Goods"/>
+        android:text="DANGEROUS GOODS"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
         android:text="@string/isi_dg"
         android:textAlignment="center"
         android:textSize="15sp"
-        android:textColor="@color/blackdop"
+        android:textColor="#212121"
         />
 
     <Button
@@ -37,7 +38,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="17sp"
+        android:textSize="15sp"
         android:background="#fff"
         android:textColor="@color/blackdop"
         android:text="Classification and Label Marking"
@@ -50,7 +51,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="30dp"
-        android:textSize="17sp"
+        android:textSize="15sp"
         android:textColor="@color/blackdop"
         android:text="Segregation"
         android:background="#fff"

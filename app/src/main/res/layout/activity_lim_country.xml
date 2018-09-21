@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".LimCountry"
     android:orientation="vertical"
-    android:background="@color/background"
-    tools:context=".LimCountry">
-
+    android:background="@color/background">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -34,7 +33,6 @@
                 android:textColor="@color/blackdop"
                 android:id="@+id/toolbar_title" />
 
-
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -42,29 +40,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:background="#fff">
 
-        <ImageView
-            android:id="@+id/gambarItem"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_nav_limitation"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/gambarItem"-->
+            <!--android:layout_width="50sp"-->
+            <!--android:layout_height="50sp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:src="@drawable/ic_nav_limitation"/>-->
 
         <TextView
             android:id="@+id/judul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="32sp"
-            android:layout_marginLeft="16sp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="Limitation Country"
             android:textStyle="bold"
-            android:textColor="#000"
-            android:textSize="30sp"/>
+            android:textColor="@color/blackdop"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
@@ -73,6 +73,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentStart="true">
 
     </android.support.v7.widget.RecyclerView>

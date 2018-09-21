@@ -6,8 +6,9 @@
     android:id="@+id/drawer_layout"
     android:layout_height="match_parent"
     tools:context=".DangerousGoodsAct"
+    tools:openDrawer="start"
+    android:orientation="vertical"
     android:background="@color/background">
-
 
     <include
         layout="@layout/app_bar_dg"
@@ -22,7 +23,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
-
 
 
 </android.support.v4.widget.DrawerLayout>

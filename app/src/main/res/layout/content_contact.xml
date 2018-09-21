@@ -1,46 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_nav_contact"/>
 
     <TextView
         android:id="@+id/judul"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30sp"
-        android:text="Contact"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="CONTACT"
         android:textStyle="bold"
-        android:textColor="#000"
-        android:textSize="24sp"/>
+        android:textColor="@color/blackdop"
+        android:textSize="25sp"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:textColor="#000"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#212121"
         android:text="@string/contact"
-        android:textAlignment="center"
         android:textSize="15sp"/>
 
-    <EditText
-        android:layout_width="300sp"
-        android:layout_height="150sp"
-        android:layout_marginTop="20sp"
-        android:textSize="15sp"
-        android:textColor="#000"
-        android:id="@+id/txt_pesan"
-        />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="  Write Message Here"
+            android:id="@+id/txt_pesan"
+            android:inputType="textMultiLine"
+            android:background="#fff"
+            android:textSize="15sp"
+            android:textColor="#212121"
+            />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:layout_width="300sp"
         android:layout_height="50sp"
         android:layout_marginTop="20sp"
+        android:layout_gravity="center"
+        android:background="#fff"
         android:text="SEND MESSAGE"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold"
-        android:textColor="#000"
+        android:textColor="@color/blackdop"
         android:id="@+id/btn_contact"/>
 
 </LinearLayout>

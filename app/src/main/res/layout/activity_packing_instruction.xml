@@ -7,7 +7,8 @@
     android:id="@+id/drawer_layout"
     tools:context=".PackingInstructionAct"
     tools:openDrawer="start"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
 
     <include
         layout="@layout/app_bar_packing_instruction"

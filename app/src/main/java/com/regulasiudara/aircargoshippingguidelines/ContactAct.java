@@ -103,7 +103,7 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
             }
         }
 
-        btn_contact = (Button) findViewById(R.id.btn_registrasi);
+        btn_contact = (Button) findViewById(R.id.btn_contact);
         txt_username = (EditText) findViewById(R.id.txt_usernameregis);
         txt_email = (EditText) findViewById(R.id.txt_email);
         txt_phone = (EditText) findViewById(R.id.txt_phone);
@@ -120,13 +120,13 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
                 String pesan = txt_pesan.getText().toString();
 
                 if (txt_username.getText().toString().length()==0) {
-                    txt_username.setError("Please Input Username");
+                    txt_username.setError("Username Null");
                 }
                 else if (txt_email.getText().toString().length()==0){
-                    txt_email.setError("Please Input Email");
+                    txt_email.setError("Email Null");
                 }
                 else if (txt_phone.getText().toString().length()==0){
-                    txt_phone.setError("Please Input Phone");
+                    txt_phone.setError("Telephone Null");
                 }
                 else if (txt_pesan.getText().toString().length()==0){
                     txt_pesan.setError("Please Input Message");

@@ -21,10 +21,10 @@
         <!--/>-->
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/logo_nama2"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         />
 
     <LinearLayout
@@ -32,11 +32,12 @@
         android:layout_height="60dp"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:layout_marginTop="70dp">
+        android:layout_marginTop="50dp">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginRight="10dp"
             android:src="@drawable/ic_reg_username"
             />
@@ -52,6 +53,9 @@
                 android:id="@+id/username"
                 android:maxLines="1"
                 android:lines="1"
+                android:textSize="15sp"
+                android:textColor="#212121"
+                android:background="#fff"
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -64,8 +68,9 @@
         android:layout_marginTop="5dp">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginRight="10dp"
             android:src="@drawable/ic_reg_pass"
             />
@@ -84,6 +89,9 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:lines="1"
+                android:textSize="15sp"
+                android:textColor="#212121"
+                android:background="#fff"
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -93,15 +101,19 @@
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:text="LOGIN"
+        android:textStyle="bold"
+        android:textColor="@color/blackdop"
+        android:textSize="15sp"
         android:id="@+id/login"
+        android:background="#fff"
         />
 
     <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="30dp"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -109,6 +121,7 @@
             android:layout_weight="1"
             android:text="@string/tanya_regis"
             android:textColor="@color/blackdop"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -118,6 +131,7 @@
             android:text="@string/registrasi"
             android:textColor="@color/blackdop"
             android:id="@+id/registernow"
+            android:textSize="13sp"
             />
     </LinearLayout>
 

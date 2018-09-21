@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ProperShippingNameAct"
     tools:openDrawer="start"
-    android:id="@+id/drawer_layout">
+    android:id="@+id/drawer_layout"
+    android:orientation="vertical"
+    android:background="@color/background">
 
     <include
         layout="@layout/app_bar_psn"

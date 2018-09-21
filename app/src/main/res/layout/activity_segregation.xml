@@ -32,7 +32,6 @@
                 android:textColor="@color/blackdop"
                 android:id="@+id/toolbar_title" />
 
-
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -47,32 +46,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/judul"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
                 android:text="Judul Artikel"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#212121"
-                android:layout_marginTop="16dp"/>
+                android:textColor="@color/blackdop"/>
 
             <TextView
                 android:id="@+id/isi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="20dp"
                 android:text=""
+                android:textSize="15sp"
                 android:textColor="#212121"
                 />
 
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

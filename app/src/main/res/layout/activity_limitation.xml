@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".LimitationAct">
+    tools:context=".LimitationAct"
+    tools:openDrawer="start"
+    android:orientation="vertical"
+    android:background="@color/background">
 
     <include
         layout="@layout/app_bar_limitation"
