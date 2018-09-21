@@ -57,8 +57,13 @@ public class LimCountry extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lim_country);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         articleModelList = new ArrayList<>();
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");

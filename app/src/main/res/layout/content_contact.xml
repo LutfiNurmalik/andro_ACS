@@ -34,24 +34,26 @@
         android:text="@string/contact"
         android:textSize="15sp"/>
 
-    <android.support.design.widget.TextInputLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:gravity="center">
+        android:background="#fff">
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="  Write Message Here"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:hint="  Write Message Here...."
             android:id="@+id/txt_pesan"
             android:inputType="textMultiLine"
             android:background="#fff"
             android:textSize="15sp"
             android:textColor="#212121"
             />
-    </android.support.design.widget.TextInputLayout>
+
+    </ScrollView>
 
     <Button
         android:layout_width="300sp"

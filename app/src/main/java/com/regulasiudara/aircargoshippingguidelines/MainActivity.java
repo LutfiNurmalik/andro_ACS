@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -43,8 +44,11 @@ public class MainActivity extends AppCompatActivity
     List<ArticleModel> articleModelList;
 //    private ProgressDialog pDialog;
     private static String TAG = MainActivity.class.getSimpleName();
-    TextView judul, subJudul;
+    TextView judul, txt_username;
     ImageView header;
+    String username;
+    SharedPreferences sharedpreferences;
+    public static final String TAG_USERNAME = "username";
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
@@ -69,6 +73,11 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
         judul = (TextView) findViewById(R.id.judul);
+//        txt_username = (TextView) findViewById(R.id.txt_account);
+//
+//        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+//        username = getIntent().getStringExtra(TAG_USERNAME);
+//        txt_username.setText("USERNAME : " + username);
     }
 
     @Override
