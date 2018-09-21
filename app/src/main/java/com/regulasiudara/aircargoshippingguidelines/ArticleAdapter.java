@@ -14,11 +14,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     Context context;
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView headerItem;
-        public ImageView gambarItem;
         ViewHolder(View itemView){
             super(itemView);
             headerItem = (TextView) itemView.findViewById(R.id.headerItem);
-            gambarItem = (ImageView) itemView.findViewById(R.id.gambarItem);
         }
     }
     public ArticleAdapter(List<ArticleModel> list, Context context){
