@@ -612,6 +612,13 @@
         Small oxygen cylinders containing gaseous oxygen or air required for medical use are not permitted on the person, in checked or carry on baggage. Czech Airlines provide oxygen cylinders on request of passenger during flight booking, but at least 48 hours in advance. \n\n
     </string>
 
+    <!--<menu utama>-->
+
+    <string name="welcome">
+        Find Your Air Cargo Shipping Guidelines Information That You Need Here \n\n
+        Visit Our Website On \n
+    </string>
+
 
     <!--about-->
 
