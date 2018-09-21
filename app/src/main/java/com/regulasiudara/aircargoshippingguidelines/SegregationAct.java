@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import java.util.List;
 public class SegregationAct extends AppCompatActivity {
 
     private TextView judulTV, kontenTV;
+    private WebView isi_web;
 
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
@@ -64,6 +66,8 @@ public class SegregationAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segregation);
 
+        isi_web = findViewById(R.id.isi_web2);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +82,15 @@ public class SegregationAct extends AppCompatActivity {
 //        judul = intent.getStringExtra("judul");
 //        konten = intent.getStringExtra("konten");
         judulTV = (TextView) findViewById(R.id.judul);
-        kontenTV = (TextView) findViewById(R.id.isi);
+//        kontenTV = (TextView) findViewById(R.id.isi);
 //        judulTV.setText(judul);
 //        kontenTV.setText(Html.fromHtml(konten, new ImageGetter(this), null));
+//        final String mimeType = "text/html";
+//        final String encoding = "UTF-8";
+        final String mimeType = "text/html";
+        final String encoding = "UTF-8";
+
+
 
         requestQueue = Volley.newRequestQueue(SegregationAct.this);
 
@@ -89,6 +99,7 @@ public class SegregationAct extends AppCompatActivity {
         stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("segregation");
@@ -100,7 +111,7 @@ public class SegregationAct extends AppCompatActivity {
                         list_data.add(map);
                     }
                     judulTV.setText(list_data.get(0).get("judul"));
-                    kontenTV.setText(Html.fromHtml(list_data.get(0).get("konten")));
+                    isi_web.loadDataWithBaseURL("", konten, mimeType, encoding, "");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

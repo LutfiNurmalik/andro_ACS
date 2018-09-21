@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 public class ArtikelLimCountry extends AppCompatActivity {
 
     String judul,isi, konten;
     TextView judulTV, kontenTV, isiTV;
+    WebView isi_web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +28,24 @@ public class ArtikelLimCountry extends AppCompatActivity {
             }
         });
 
+        //deklarasi variabel
+        isi_web = findViewById(R.id.isi_web);
+
+        //pengaturan webview
+        final String mimeType = "text/html";
+        final String encoding = "UTF-8";
+
         Intent intent = getIntent();
         judul = intent.getStringExtra("judul");
         konten = intent.getStringExtra("konten");
         judulTV = (TextView) findViewById(R.id.judul);
         kontenTV = (TextView) findViewById(R.id.isi);
         judulTV.setText(judul);
-        kontenTV.setText(Html.fromHtml(konten, new ImageGetter(this), null));
+//        kontenTV.setText(Html.fromHtml(konten, new ImageGetter(this), null));
+        // webview
+        isi_web.loadDataWithBaseURL("", konten, mimeType, encoding, "");
+        //supaya bisa di zoom
+        isi_web.getSettings().setBuiltInZoomControls(true);
+//        isi_web.getSettings().setUseWideViewPort(true);
     }
 }
