@@ -3,6 +3,7 @@ package com.regulasiudara.aircargoshippingguidelines;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.NavigationView;
@@ -47,6 +48,10 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
     private static String TAG = DangerousGoodsAct.class.getSimpleName();
     TextView judul, subJudul;
     ImageView header;
+    String username;
+    public static final String TAG_USERNAME = "username";
+    SharedPreferences sharedpreferences;
+
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
@@ -70,8 +75,15 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+        username = getIntent().getStringExtra(TAG_USERNAME);
+        navUsername.setText("USERNAME : " + username);
+
         Button bclass = (Button) findViewById(R.id.pindah_classification);
         bclass.setOnClickListener(this);
         Button bsegre = (Button) findViewById(R.id.pindah_segregation);
@@ -97,8 +109,14 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-//            Intent intent6 = new Intent(DangerousGoodsAct.this, AboutUsActivity.class);
-//            startActivity(intent6);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(Login.session_status, false);
+            editor.putString(TAG_USERNAME, null);
+            editor.commit();
+
+            Intent intent = new Intent(DangerousGoodsAct.this, Login.class);
+            finish();
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -125,14 +143,14 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
                 Intent intent5 = new Intent(DangerousGoodsAct.this, LimitationAct.class);
                 startActivity(intent5);
                 break;
-            case R.id.nav_about:
-                Intent intent6 = new Intent(DangerousGoodsAct.this, AboutAct.class);
-                startActivity(intent6);
-                break;
-            case R.id.nav_contact:
-                Intent intent7 = new Intent(DangerousGoodsAct.this, ContactAct.class);
-                startActivity(intent7);
-                break;
+//            case R.id.nav_about:
+//                Intent intent6 = new Intent(DangerousGoodsAct.this, AboutAct.class);
+//                startActivity(intent6);
+//                break;
+//            case R.id.nav_contact:
+//                Intent intent7 = new Intent(DangerousGoodsAct.this, ContactAct.class);
+//                startActivity(intent7);
+//                break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

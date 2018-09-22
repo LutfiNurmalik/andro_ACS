@@ -10,6 +10,7 @@
     <string name="persetujuan">I Am Responsible That The Data I Entered Is Correct</string>
     <string name="action_settings">Settings</string>
     <string name="action_logout">Log Out</string>
+    <string name="linkdg"><u>www.dgregulations.com</u></string>
     <string-array name="spinner_gender">
         <item>Male</item>
         <item>Female</item>

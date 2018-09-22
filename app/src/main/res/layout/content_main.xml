@@ -43,9 +43,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="www.dgregulations.com"
         android:textSize="20sp"
-        android:textColor="@color/blackdop"
+        android:textColor="#0066ff"
         android:textAlignment="center"
         android:id="@+id/txt_linkdg"/>
 

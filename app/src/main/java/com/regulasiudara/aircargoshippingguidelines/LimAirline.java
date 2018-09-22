@@ -33,7 +33,7 @@ import java.util.List;
 
 public class LimAirline extends AppCompatActivity {
 
-    private String urlJsonObj = "http://192.168.43.225/test/getlist_airline.php";
+    private String urlJsonObj = Server.URL +"getlist_airline.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
     private Context context = LimAirline.this;

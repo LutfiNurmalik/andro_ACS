@@ -39,7 +39,7 @@ public class ArtikelLimAirline extends AppCompatActivity {
         judul = intent.getStringExtra("link");
         konten = intent.getStringExtra("konten");
         judulTV = (TextView) findViewById(R.id.judul);
-        kontenTV = (TextView) findViewById(R.id.isi);
+        //kontenTV = (TextView) findViewById(R.id.isi);
         judulTV.setText(judul);
 //        kontenTV.setText(Html.fromHtml(konten, new ImageGetter(this), null));
         // webview

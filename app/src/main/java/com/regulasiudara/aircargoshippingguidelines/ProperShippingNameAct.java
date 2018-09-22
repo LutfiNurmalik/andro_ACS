@@ -3,6 +3,7 @@ package com.regulasiudara.aircargoshippingguidelines;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -37,13 +38,15 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
     public Button tcari;
     public EditText unID;
     public EditText etPSN;
-    String unid,psn ;
+    String unid,psn, username ;
     TextView txtunID,txtpsn,txtclass,txthazard,txtpg,txtpa_pi,txtpa_net_qty,txtcao_pi,txtcao_net_qty, txtsp,txterg;
     private ProgressDialog pd;
 
     private Context context = ProperShippingNameAct.this;
 
     List<ArticleModel> articleModelList;
+    SharedPreferences sharedpreferences;
+    public static final String TAG_USERNAME = "username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,14 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+        username = getIntent().getStringExtra(TAG_USERNAME);
+        navUsername.setText("USERNAME : " + username);
 
         etPSN = (EditText) findViewById(R.id.et_psn);
         tcari = (Button) findViewById(R.id.tcari);
@@ -86,9 +95,11 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
             }
         });
     }
+
+
     private void getSqlDetails() {
 
-        String url= "http://192.168.2.103/dbpariwisata/getlist_psn.php?psn="+psn;
+        String url= Server.URL + "getlist_psn.php?psn="+psn;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
@@ -166,8 +177,14 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-//            Intent intent6 = new Intent(DangerousGoodsAct.this, AboutUsActivity.class);
-//            startActivity(intent6);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(Login.session_status, false);
+            editor.putString(TAG_USERNAME, null);
+            editor.commit();
+
+            Intent intent = new Intent(ProperShippingNameAct.this, Login.class);
+            finish();
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -194,14 +211,14 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
                 Intent intent5 = new Intent(ProperShippingNameAct.this, LimitationAct.class);
                 startActivity(intent5);
                 break;
-            case R.id.nav_about:
-                Intent intent6 = new Intent(ProperShippingNameAct.this, AboutAct.class);
-                startActivity(intent6);
-                break;
-            case R.id.nav_contact:
-                Intent intent7 = new Intent(ProperShippingNameAct.this, ContactAct.class);
-                startActivity(intent7);
-                break;
+//            case R.id.nav_about:
+//                Intent intent6 = new Intent(ProperShippingNameAct.this, AboutAct.class);
+//                startActivity(intent6);
+//                break;
+//            case R.id.nav_contact:
+//                Intent intent7 = new Intent(ProperShippingNameAct.this, ContactAct.class);
+//                startActivity(intent7);
+//                break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
