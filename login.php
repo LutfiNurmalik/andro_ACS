@@ -25,7 +25,6 @@
 			$response = new usr();
 			$response->success = 1;
 			$response->message = "Selamat datang ".$row['username'];
-			$response->id = $row['id'];
 			$response->username = $row['username'];
 			echo json_encode($response);
 			
