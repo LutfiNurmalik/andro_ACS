@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -70,6 +72,8 @@ public class MainActivity extends AppCompatActivity
     CarouselView carouselView;
     int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4, R.drawable.slider5, R.drawable.slider6, R.drawable.slider7};
 
+    // fungsi link
+//    TextView txt_linkdg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,22 @@ public class MainActivity extends AppCompatActivity
 //                        .setAction("Action", null).show();
 //            }
 //        });
+
+//        //fungsi link
+//        txt_linkdg = findViewById(R.id.txt_linkdg);
+//        String formattedText = "<a>www.dgregulations.com</a>";
+//        txt_linkdg.setText(Html.fromHtml(formattedText));
+//        txt_linkdg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentlink = new Intent();
+//                intentlink.setAction(Intent.ACTION_VIEW);
+//                intentlink.addCategory(Intent.CATEGORY_BROWSABLE);
+//                intentlink.setData(Uri.parse("http://www.dgregulations.com"));
+//                startActivity(intentlink);
+//            }
+//        });
+
     }
 
     //proses carousel
@@ -177,14 +197,14 @@ public class MainActivity extends AppCompatActivity
                 Intent intent5 = new Intent(MainActivity.this, LimitationAct.class);
                 startActivity(intent5);
                 break;
-            case R.id.nav_about:
-                Intent intent6 = new Intent(MainActivity.this, AboutAct.class);
-                startActivity(intent6);
-                break;
-            case R.id.nav_contact:
-                Intent intent7 = new Intent(MainActivity.this, ContactAct.class);
-                startActivity(intent7);
-                break;
+//            case R.id.nav_about:
+//                Intent intent6 = new Intent(MainActivity.this, AboutAct.class);
+//                startActivity(intent6);
+//                break;
+//            case R.id.nav_contact:
+//                Intent intent7 = new Intent(MainActivity.this, ContactAct.class);
+//                startActivity(intent7);
+//                break;
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

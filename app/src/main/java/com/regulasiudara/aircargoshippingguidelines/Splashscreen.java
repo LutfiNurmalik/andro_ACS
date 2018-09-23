@@ -38,7 +38,8 @@ public class Splashscreen extends AppCompatActivity {
                     // make first time launch TRUE
                     prefManager.setFirstTimeLaunch(true);
 
-                    startActivity(new Intent(Splashscreen.this, Login.class));
+//                    startActivity(new Intent(Splashscreen.this, Login.class));
+                    startActivity(new Intent(Splashscreen.this, MainActivity.class));
                     finish();
                 }
             }

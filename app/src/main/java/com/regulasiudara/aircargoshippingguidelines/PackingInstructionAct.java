@@ -175,14 +175,14 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
                 Intent intent5 = new Intent(PackingInstructionAct.this, LimitationAct.class);
                 startActivity(intent5);
                 break;
-            case R.id.nav_about:
-                Intent intent6 = new Intent(PackingInstructionAct.this, AboutAct.class);
-                startActivity(intent6);
-                break;
-            case R.id.nav_contact:
-                Intent intent7 = new Intent(PackingInstructionAct.this, ContactAct.class);
-                startActivity(intent7);
-                break;
+//            case R.id.nav_about:
+//                Intent intent6 = new Intent(PackingInstructionAct.this, AboutAct.class);
+//                startActivity(intent6);
+//                break;
+//            case R.id.nav_contact:
+//                Intent intent7 = new Intent(PackingInstructionAct.this, ContactAct.class);
+//                startActivity(intent7);
+//                break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

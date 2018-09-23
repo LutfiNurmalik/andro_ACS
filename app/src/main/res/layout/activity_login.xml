@@ -55,7 +55,6 @@
                 android:lines="1"
                 android:textSize="15sp"
                 android:textColor="#212121"
-                android:background="#fff"
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -91,7 +90,6 @@
                 android:lines="1"
                 android:textSize="15sp"
                 android:textColor="#212121"
-                android:background="#fff"
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>

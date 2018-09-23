@@ -279,12 +279,12 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
                 Intent intent5 = new Intent(ContactAct.this, LimitationAct.class);
                 startActivity(intent5);
                 break;
-            case R.id.nav_about:
-                Intent intent6 = new Intent(ContactAct.this, AboutAct.class);
-                startActivity(intent6);
-                break;
-            case R.id.nav_contact:
-                break;
+//            case R.id.nav_about:
+//                Intent intent6 = new Intent(ContactAct.this, AboutAct.class);
+//                startActivity(intent6);
+//                break;
+//            case R.id.nav_contact:
+//                break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

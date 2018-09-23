@@ -90,14 +90,14 @@ public class LimitationAct extends AppCompatActivity implements NavigationView.O
                     break;
             case R.id.nav_limitation:
                 break;
-            case R.id.nav_about:
-                Intent intent6 = new Intent(LimitationAct.this, AboutAct.class);
-                startActivity(intent6);
-                break;
-            case R.id.nav_contact:
-                Intent intent7 = new Intent(LimitationAct.this, ContactAct.class);
-                startActivity(intent7);
-                break;
+//            case R.id.nav_about:
+//                Intent intent6 = new Intent(LimitationAct.this, AboutAct.class);
+//                startActivity(intent6);
+//                break;
+//            case R.id.nav_contact:
+//                Intent intent7 = new Intent(LimitationAct.this, ContactAct.class);
+//                startActivity(intent7);
+//                break;
             }
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
