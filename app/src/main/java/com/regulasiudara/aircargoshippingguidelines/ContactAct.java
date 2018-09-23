@@ -65,7 +65,7 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
     int success;
     ConnectivityManager conMgr;
 
-    private String url = Server.URL_REGIS + "contact.php";
+    private String url = Server.URL + "contact.php";
 
     private static final String TAG = ContactAct.class.getSimpleName();
 

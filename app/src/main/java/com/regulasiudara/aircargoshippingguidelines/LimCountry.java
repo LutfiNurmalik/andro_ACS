@@ -33,7 +33,7 @@ import java.util.List;
 
 public class LimCountry extends AppCompatActivity {
 
-    private String urlJsonObj = "http://192.168.43.225/test/getlist_country.php";
+    private String urlJsonObj = Server.URL +"getlist_country.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
     private Context context = LimCountry.this;

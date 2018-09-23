@@ -74,7 +74,8 @@ public class SegregationAct extends AppCompatActivity {
             }
         });
 
-        String url = "http://192.168.43.225/test/getlist_segregation.php";
+
+        String url = Server.URL + "getlist_segregation.php";
 
 //        Intent intent = getIntent();
 //        judul = intent.getStringExtra("judul");

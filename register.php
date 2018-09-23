@@ -21,7 +21,7 @@
 
 			if ($num_rows == 0){
 				$passwordHash = password_hash ($password, PASSWORD_DEFAULT);
-				$query = mysqli_query($con, "INSERT INTO tbl_register (username, password, id_user, first_name, last_name, email, phone, gender, birth, address, institution) VALUES('".$username."','".$passwordHash."','".$id."','".$first_name."','".$last_name."','".$email."','".$phone."','".$gender."','".$birth."','".$address."','".$institution."')");
+				$query = mysqli_query($con, "INSERT INTO tbl_register (username, password, first_name, last_name, email, phone, gender, birth, address, institution) VALUES('".$username."','".$passwordHash."','".$first_name."','".$last_name."','".$email."','".$phone."','".$gender."','".$birth."','".$address."','".$institution."')");
 
 				if ($query){
 					$response = new usr();

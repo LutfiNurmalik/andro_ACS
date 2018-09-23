@@ -51,7 +51,7 @@ public class Registrasi extends AppCompatActivity implements View.OnClickListene
     int success;
     ConnectivityManager conMgr;
 
-    private String url = Server.URL_REGIS + "register.php";
+    private String url = Server.URL + "register.php";
 
     private static final String TAG = Registrasi.class.getSimpleName();
 

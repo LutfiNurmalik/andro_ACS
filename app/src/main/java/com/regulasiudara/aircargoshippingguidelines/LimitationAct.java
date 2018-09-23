@@ -2,6 +2,7 @@ package com.regulasiudara.aircargoshippingguidelines;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,10 @@ public class LimitationAct extends AppCompatActivity implements NavigationView.O
 
     private Context context = LimitationAct.this;
     List<ArticleModel> articleModelList;
+
+        public static final String TAG_USERNAME = "username";
+        String username;
+        SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +42,15 @@ public class LimitationAct extends AppCompatActivity implements NavigationView.O
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         navigationView.setNavigationItemSelectedListener(this);
         articleModelList = new ArrayList<>();
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+        username = getIntent().getStringExtra(TAG_USERNAME);
+        navUsername.setText("USERNAME : " + username);
+
         Button bCountry = (Button)findViewById(R.id.pindah_limCountry);
         bCountry.setOnClickListener(this);
         Button bAirline = (Button)findViewById(R.id.pindah_limAirlines);
@@ -62,8 +75,14 @@ public class LimitationAct extends AppCompatActivity implements NavigationView.O
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == R.id.action_settings) {
-//            Intent intent6 = new Intent(DangerousGoodsAct.this, AboutUsActivity.class);
-//            startActivity(intent6);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putBoolean(Login.session_status, false);
+                editor.putString(TAG_USERNAME, null);
+                editor.commit();
+
+                Intent intent = new Intent(LimitationAct.this, Login.class);
+                finish();
+                startActivity(intent);
                 return true;
             }
             return super.onOptionsItemSelected(item);

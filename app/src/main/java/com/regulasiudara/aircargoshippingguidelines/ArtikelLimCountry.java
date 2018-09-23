@@ -49,3 +49,4 @@ public class ArtikelLimCountry extends AppCompatActivity {
 //        isi_web.getSettings().setUseWideViewPort(true);
     }
 }
+
