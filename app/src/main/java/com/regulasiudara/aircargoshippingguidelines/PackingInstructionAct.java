@@ -48,6 +48,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     private static String TAG = PackingInstructionAct.class.getSimpleName();
     TextView judul, subJudul;
     ImageView header;
+
     String username;
     SharedPreferences sharedpreferences;
     public static final String TAG_USERNAME = "username";
@@ -56,7 +57,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
         if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
-            Toast.makeText(context, "PERIKSA KONEKSI INTERNET ANDA!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Check Your Internet Connection!!!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -66,6 +67,9 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packing_instruction);
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -73,15 +77,16 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
-        navUsername.setText("USERNAME : " + username);
+        navUsername.setText("Username : " + username);
 
         judul = (TextView) findViewById(R.id.judul);
         pDialog = new ProgressDialog(this);

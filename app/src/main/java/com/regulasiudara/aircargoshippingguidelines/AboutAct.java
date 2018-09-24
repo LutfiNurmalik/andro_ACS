@@ -3,6 +3,7 @@ package com.regulasiudara.aircargoshippingguidelines;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -34,6 +35,10 @@ public class AboutAct extends AppCompatActivity implements NavigationView.OnNavi
     private static String TAG = AboutAct.class.getSimpleName();
     TextView judul;
     ImageView header;
+    String username;
+    SharedPreferences sharedpreferences;
+    public static final String TAG_USERNAME = "username";
+
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
@@ -58,7 +63,13 @@ public class AboutAct extends AppCompatActivity implements NavigationView.OnNavi
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+        username = getIntent().getStringExtra(TAG_USERNAME);
+        navUsername.setText("Username : " + username);
     }
 
     @Override
@@ -80,8 +91,14 @@ public class AboutAct extends AppCompatActivity implements NavigationView.OnNavi
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-//            Intent intent6 = new Intent(PackingInstructionAct.this, AboutUsActivity.class);
-//            startActivity(intent6);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(Login.session_status, false);
+            editor.putString(TAG_USERNAME, null);
+            editor.commit();
+
+            Intent intent = new Intent(AboutAct.this, Login.class);
+            finish();
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

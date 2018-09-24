@@ -46,7 +46,7 @@ public class ClassificationAct extends AppCompatActivity {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
         if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
-            Toast.makeText(context, "PERIKSA KONEKSI INTERNET ANDA!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Check Your Internet Connection!!!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

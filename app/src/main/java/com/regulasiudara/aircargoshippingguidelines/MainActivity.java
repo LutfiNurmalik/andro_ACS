@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -54,13 +57,14 @@ public class MainActivity extends AppCompatActivity
     TextView judul, txt_username;
     ImageView header;
     String username;
-    SharedPreferences sharedpreferences;
     public static final String TAG_USERNAME = "username";
+    SharedPreferences sharedpreferences;
+
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
         if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
-            Toast.makeText(context, "PERIKSA KONEKSI INTERNET ANDA!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Check Your Internet Connection!!!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -68,13 +72,15 @@ public class MainActivity extends AppCompatActivity
 
     //fungsi carousel
     CarouselView carouselView;
-    int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4, R.drawable.slider5, R.drawable.slider6, R.drawable.slider7};
+    int[] sampleImages = {R.drawable.carslide1, R.drawable.carslide2, R.drawable.carslide3, R.drawable.carslide4, R.drawable.carslide5};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,16 +90,25 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
         judul = (TextView) findViewById(R.id.judul);
+//
+//        TextView linkdg = findViewById(R.id.txt_linkdg);
+//        linkdg.setText( Html.fromHtml("<font color=#0066ff><a href=\"http://www.dgregulations.com\">www.dgregulations.com</a></font>"));
+//        linkdg.setMovementMethod(LinkMovementMethod.getInstance());
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+        username = getIntent().getStringExtra(TAG_USERNAME);
+        navUsername.setText("Username : " + username);
 
 //        txt_username = (TextView) findViewById(R.id.txt_account);
 //
 //        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
 //        username = getIntent().getStringExtra(TAG_USERNAME);
 //        txt_username.setText("USERNAME : " + username);
-
 
         //fungsi carousel
         carouselView = findViewById(R.id.carouselView);
@@ -121,21 +136,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         AlertDialog.Builder keluar = new AlertDialog.Builder(MainActivity.this);
-        keluar.setMessage("Anda yakin mau keluar?").setCancelable(false)
-                .setPositiveButton("Ya", new AlertDialog.OnClickListener(){
+        keluar.setMessage("Are you want to exit?").setCancelable(false)
+                .setPositiveButton("Yes", new AlertDialog.OnClickListener(){
                     public void onClick(DialogInterface arg0, int arg1){
                         Intent intent = new Intent(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
-                }).setNegativeButton("Tidak", new AlertDialog.OnClickListener(){
+                }).setNegativeButton("No", new AlertDialog.OnClickListener(){
             public void onClick(DialogInterface dialog, int arg1){
                 dialog.cancel();
             }
         });
         AlertDialog dialog1 = keluar.create();
-        dialog1.setTitle("Keluar");
+        dialog1.setTitle("Exit");
         dialog1.show();
     }
     @Override
@@ -148,8 +163,14 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            //Intent intent6 = new Intent(MainActivity.this, AboutUsActivity.class);
-            //startActivity(intent6);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(Login.session_status, false);
+            editor.putString(TAG_USERNAME, null);
+            editor.commit();
+
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            finish();
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -48,6 +48,7 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
     private static String TAG = DangerousGoodsAct.class.getSimpleName();
     TextView judul, subJudul;
     ImageView header;
+
     String username;
     public static final String TAG_USERNAME = "username";
     SharedPreferences sharedpreferences;
@@ -67,6 +68,8 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangerous_goods);
 
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -74,15 +77,16 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
-        navUsername.setText("USERNAME : " + username);
+        navUsername.setText("Username : " + username);
 
         Button bclass = (Button) findViewById(R.id.pindah_classification);
         bclass.setOnClickListener(this);

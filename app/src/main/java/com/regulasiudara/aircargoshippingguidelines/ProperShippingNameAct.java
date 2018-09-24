@@ -38,7 +38,7 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
     public Button tcari;
     public EditText unID;
     public EditText etPSN;
-    String unid,psn, username ;
+    String unid, psn, username ;
     TextView txtunID,txtpsn,txtclass,txthazard,txtpg,txtpa_pi,txtpa_net_qty,txtcao_pi,txtcao_net_qty, txtsp,txterg;
     private ProgressDialog pd;
 
@@ -52,6 +52,9 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proper_shipping_name);
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -59,15 +62,16 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
-        navUsername.setText("USERNAME : " + username);
+        navUsername.setText("Username : " + username);
 
         etPSN = (EditText) findViewById(R.id.et_psn);
         tcari = (Button) findViewById(R.id.tcari);
