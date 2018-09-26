@@ -36,6 +36,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONArray;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     //private String urlJsonObj = "https://duniasehat.000webhostapp.com/artikel.php";
     private RecyclerView recyclerView;
@@ -114,7 +115,6 @@ public class MainActivity extends AppCompatActivity
         carouselView = findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
-        carouselView.setOnClickListener(this);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -221,31 +221,31 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.drawable.carslide2:
-                Intent intentslide2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
-                intentslide2.putExtra(TAG_USERNAME, username);
-                finish();
-                startActivity(intentslide2);
-            case R.drawable.carslide3:
-                Intent intentslide3 = new Intent(MainActivity.this, ProperShippingNameAct.class);
-                intentslide3.putExtra(TAG_USERNAME, username);
-                finish();
-                startActivity(intentslide3);
-            case R.drawable.carslide4:
-                Intent intentslide4 = new Intent(MainActivity.this, PackingInstructionAct.class);
-                intentslide4.putExtra(TAG_USERNAME, username);
-                finish();
-                startActivity(intentslide4);
-            case R.drawable.carslide5:
-                Intent intentslide5 = new Intent(MainActivity.this, LimitationAct.class);
-                intentslide5.putExtra(TAG_USERNAME, username);
-                finish();
-                startActivity(intentslide5);
-        }
-    }
+//    @Override
+//    public void onClick(int position) {
+//        switch (position.get()){
+//            case R.drawable.carslide2:
+//                Intent intentslide2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
+//                intentslide2.putExtra(TAG_USERNAME, username);
+//                finish();
+//                startActivity(intentslide2);
+//            case R.drawable.carslide3:
+//                Intent intentslide3 = new Intent(MainActivity.this, ProperShippingNameAct.class);
+//                intentslide3.putExtra(TAG_USERNAME, username);
+//                finish();
+//                startActivity(intentslide3);
+//            case R.drawable.carslide4:
+//                Intent intentslide4 = new Intent(MainActivity.this, PackingInstructionAct.class);
+//                intentslide4.putExtra(TAG_USERNAME, username);
+//                finish();
+//                startActivity(intentslide4);
+//            case R.drawable.carslide5:
+//                Intent intentslide5 = new Intent(MainActivity.this, LimitationAct.class);
+//                intentslide5.putExtra(TAG_USERNAME, username);
+//                finish();
+//                startActivity(intentslide5);
+//        }
+//    }
 //    private void showpDialog() {
 //        if (!pDialog.isShowing())
 //            pDialog.show();
