@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -28,18 +30,23 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class PackingInstructionAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class PackingInstructionAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
     private String urlJsonObj = Server.URL +"getlist_pi.php";
+    private String url_cari = Server.URL +"cari_data.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
     private Context context = PackingInstructionAct.this;
@@ -51,6 +58,12 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     String username;
     SharedPreferences sharedpreferences;
     public static final String TAG_USERNAME = "username";
+    String tag_json_obj = "json_obj_req";
+
+    public static final String TAG_NAMA = "judul";
+    public static final String TAG_RESULTS = "results";
+    public static final String TAG_MESSAGE = "message";
+    public static final String TAG_VALUE = "value";
 
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -149,28 +162,110 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
             super.onBackPressed();
         }
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setQueryHint(getString(R.string.type_name));
+        searchView.setIconified(true);
+        searchView.setOnQueryTextListener(this);
         return true;
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putBoolean(Login.session_status, false);
-            editor.putString(TAG_USERNAME, null);
-            editor.commit();
 
-            Intent intent = new Intent(PackingInstructionAct.this, Login.class);
-            finish();
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    private void cariData(final String keyword) {
+        pDialog = new ProgressDialog(PackingInstructionAct.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, url_cari, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+
+                    int value = jObj.getInt(TAG_VALUE);
+
+                    if (value == 1) {
+                        articleModelList.clear();
+                        adapter.notifyDataSetChanged();
+
+                        String getObject = jObj.getString(TAG_RESULTS);
+                        JSONArray jsonArray = new JSONArray(getObject);
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject obj = jsonArray.getJSONObject(i);
+
+                            ArticleModel data = new ArticleModel();
+
+                            data.setJudul(obj.getString(TAG_NAMA));
+
+                            articleModelList.add(data);
+                        }
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                }
+
+                adapter.notifyDataSetChanged();
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("keyword", keyword);
+
+                return params;
+            }
+
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R.id.action_settings) {
+//            SharedPreferences.Editor editor = sharedpreferences.edit();
+//            editor.putBoolean(Login.session_status, false);
+//            editor.putString(TAG_USERNAME, null);
+//            editor.commit();
+//
+//            Intent intent = new Intent(PackingInstructionAct.this, Login.class);
+//            finish();
+//            startActivity(intent);
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -213,5 +308,16 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     private void hidepDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        cariData(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }
