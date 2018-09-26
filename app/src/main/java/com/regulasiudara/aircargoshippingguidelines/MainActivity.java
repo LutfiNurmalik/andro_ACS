@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     //private String urlJsonObj = "https://duniasehat.000webhostapp.com/artikel.php";
     private RecyclerView recyclerView;
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
-        navUsername.setText("Username : " + username);
+        navUsername.setText(username);
 
 //        txt_username = (TextView) findViewById(R.id.txt_account);
 //
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity
         carouselView = findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
+        carouselView.setOnClickListener(this);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -183,19 +184,26 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_dg:
                 Intent intent2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
+                intent2.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent2);
                 break;
             case R.id.nav_psn:
                 Intent intent3 = new Intent(MainActivity.this, ProperShippingNameAct.class);
-                startActivity(intent3);
+                intent3.putExtra(TAG_USERNAME, username);
                 finish();
+                startActivity(intent3);
                 break;
             case R.id.nav_pi:
                 Intent intent4 = new Intent(MainActivity.this, PackingInstructionAct.class);
+                intent4.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent4);
                 break;
             case R.id.nav_limitation:
                 Intent intent5 = new Intent(MainActivity.this, LimitationAct.class);
+                intent5.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent5);
                 break;
 //            case R.id.nav_about:
@@ -211,6 +219,32 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.drawable.carslide2:
+                Intent intentslide2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
+                intentslide2.putExtra(TAG_USERNAME, username);
+                finish();
+                startActivity(intentslide2);
+            case R.drawable.carslide3:
+                Intent intentslide3 = new Intent(MainActivity.this, ProperShippingNameAct.class);
+                intentslide3.putExtra(TAG_USERNAME, username);
+                finish();
+                startActivity(intentslide3);
+            case R.drawable.carslide4:
+                Intent intentslide4 = new Intent(MainActivity.this, PackingInstructionAct.class);
+                intentslide4.putExtra(TAG_USERNAME, username);
+                finish();
+                startActivity(intentslide4);
+            case R.drawable.carslide5:
+                Intent intentslide5 = new Intent(MainActivity.this, LimitationAct.class);
+                intentslide5.putExtra(TAG_USERNAME, username);
+                finish();
+                startActivity(intentslide5);
+        }
     }
 //    private void showpDialog() {
 //        if (!pDialog.isShowing())

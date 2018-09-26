@@ -86,7 +86,7 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
-        navUsername.setText("Username : " + username);
+        navUsername.setText(username);
 
         Button bclass = (Button) findViewById(R.id.pindah_classification);
         bclass.setOnClickListener(this);
@@ -101,7 +101,10 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
+            Intent home = new Intent(DangerousGoodsAct.this, MainActivity.class);
+            finish();
+            startActivity(home);
         }
     }
     @Override
@@ -131,20 +134,28 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Intent intent1 = new Intent(DangerousGoodsAct.this, MainActivity.class);
+                intent1.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent1);
                 break;
             case R.id.nav_dg:
                 break;
             case R.id.nav_psn:
                 Intent intent3 = new Intent(DangerousGoodsAct.this, ProperShippingNameAct.class);
+                intent3.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent3);
                 break;
             case R.id.nav_pi:
                 Intent intent4 = new Intent(DangerousGoodsAct.this, PackingInstructionAct.class);
+                intent4.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent4);
                 break;
             case R.id.nav_limitation:
                 Intent intent5 = new Intent(DangerousGoodsAct.this, LimitationAct.class);
+                intent5.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent5);
                 break;
 //            case R.id.nav_about:

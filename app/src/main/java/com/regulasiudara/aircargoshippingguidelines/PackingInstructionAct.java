@@ -86,7 +86,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
-        navUsername.setText("Username : " + username);
+        navUsername.setText(username);
 
         judul = (TextView) findViewById(R.id.judul);
         pDialog = new ProgressDialog(this);
@@ -151,7 +151,10 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
+            Intent home = new Intent(PackingInstructionAct.this, MainActivity.class);
+            finish();
+            startActivity(home);
         }
     }
     @Override
@@ -182,20 +185,28 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Intent intent1 = new Intent(PackingInstructionAct.this, MainActivity.class);
+                intent1.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent1);
                 break;
             case R.id.nav_dg:
                 Intent intent2 = new Intent(PackingInstructionAct.this, DangerousGoodsAct.class);
+                intent2.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent2);
                 break;
             case R.id.nav_psn:
                 Intent intent3 = new Intent(PackingInstructionAct.this, ProperShippingNameAct.class);
+                intent3.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent3);
                 break;
             case R.id.nav_pi:
                 break;
             case R.id.nav_limitation:
                 Intent intent5 = new Intent(PackingInstructionAct.this, LimitationAct.class);
+                intent5.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent5);
                 break;
 //            case R.id.nav_about:

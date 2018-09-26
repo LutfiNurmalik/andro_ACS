@@ -52,7 +52,7 @@ public class LimitationAct extends AppCompatActivity implements NavigationView.O
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
-        navUsername.setText("USERNAME : " + username);
+        navUsername.setText(username);
 
         Button bCountry = (Button)findViewById(R.id.pindah_limCountry);
         bCountry.setOnClickListener(this);
@@ -66,7 +66,10 @@ public class LimitationAct extends AppCompatActivity implements NavigationView.O
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             } else {
-                super.onBackPressed();
+//                super.onBackPressed();
+                Intent home = new Intent(LimitationAct.this, MainActivity.class);
+                finish();
+                startActivity(home);
             }
         }
         @Override
@@ -96,18 +99,26 @@ public class LimitationAct extends AppCompatActivity implements NavigationView.O
             switch (item.getItemId()) {
                 case R.id.nav_home:
                     Intent intent1 = new Intent(LimitationAct.this, MainActivity.class);
+                    intent1.putExtra(TAG_USERNAME, username);
+                    finish();
                     startActivity(intent1);
                     break;
                 case R.id.nav_dg:
                     Intent intent2 = new Intent(LimitationAct.this, DangerousGoodsAct.class);
+                    intent2.putExtra(TAG_USERNAME, username);
+                    finish();
                     startActivity(intent2);
                     break;
             case R.id.nav_psn:
                 Intent intent3 = new Intent(LimitationAct.this, ProperShippingNameAct.class);
+                intent3.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent3);
                 break;
                 case R.id.nav_pi:
                     Intent intent4 = new Intent(LimitationAct.this, PackingInstructionAct.class);
+                    intent4.putExtra(TAG_USERNAME, username);
+                    finish();
                     startActivity(intent4);
                     break;
             case R.id.nav_limitation:

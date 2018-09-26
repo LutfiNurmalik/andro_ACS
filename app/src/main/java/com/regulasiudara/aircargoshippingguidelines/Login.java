@@ -88,12 +88,11 @@ public class Login extends AppCompatActivity {
         username = sharedpreferences.getString(TAG_USERNAME, null);
 
         if (session) {
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            intent.putExtra(TAG_USERNAME, username);
+            Intent intent1 = new Intent(Login.this, MainActivity.class);
+            intent1.putExtra(TAG_USERNAME, username);
             finish();
-            startActivity(intent);
+            startActivity(intent1);
         }
-
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
