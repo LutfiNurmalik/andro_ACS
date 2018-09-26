@@ -34,9 +34,41 @@
         android:text="@string/contact"
         android:textSize="15sp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="username"
+        android:textColor="#212121"
+        android:textSize="15sp"
+        android:id="@+id/txt_usernamecontact"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="email"
+        android:textColor="#212121"
+        android:textSize="15sp"
+        android:id="@+id/txt_emailcontact"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="phone"
+        android:textColor="#212121"
+        android:textSize="15sp"
+        android:id="@+id/txt_phonecontact"/>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="#fff">

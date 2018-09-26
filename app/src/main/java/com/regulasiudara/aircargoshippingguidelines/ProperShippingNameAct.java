@@ -38,7 +38,7 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
     public Button tcari;
     public EditText unID;
     public EditText etPSN;
-    String unid,psn, username ;
+    String unid, psn, username ;
     TextView txtunID,txtpsn,txtclass,txthazard,txtpg,txtpa_pi,txtpa_net_qty,txtcao_pi,txtcao_net_qty, txtsp,txterg;
     private ProgressDialog pd;
 
@@ -52,6 +52,9 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proper_shipping_name);
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -59,15 +62,16 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
-        navUsername.setText("USERNAME : " + username);
+        navUsername.setText(username);
 
         etPSN = (EditText) findViewById(R.id.et_psn);
         tcari = (Button) findViewById(R.id.tcari);
@@ -165,7 +169,10 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
+            Intent home = new Intent(ProperShippingNameAct.this, MainActivity.class);
+            finish();
+            startActivity(home);
         }
     }
     @Override
@@ -195,20 +202,28 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Intent intent1 = new Intent(ProperShippingNameAct.this, MainActivity.class);
+                intent1.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent1);
                 break;
             case R.id.nav_dg:
                 Intent intent2 = new Intent(ProperShippingNameAct.this, DangerousGoodsAct.class);
+                intent2.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent2);
                 break;
             case R.id.nav_psn:
                 break;
             case R.id.nav_pi:
                 Intent intent4 = new Intent(ProperShippingNameAct.this, PackingInstructionAct.class);
+                intent4.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent4);
                 break;
             case R.id.nav_limitation:
                 Intent intent5 = new Intent(ProperShippingNameAct.this, LimitationAct.class);
+                intent5.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent5);
                 break;
 //            case R.id.nav_about:

@@ -9,17 +9,6 @@
     android:background="@color/background"
     tools:context=".Login">
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:text="LOGIN"-->
-        <!--android:textColor="@color/blackdop"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textSize="30sp"-->
-        <!--android:textStyle="bold"-->
-        <!--/>-->
-
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -55,7 +44,6 @@
                 android:lines="1"
                 android:textSize="15sp"
                 android:textColor="#212121"
-                android:background="#fff"
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -91,7 +79,6 @@
                 android:lines="1"
                 android:textSize="15sp"
                 android:textColor="#212121"
-                android:background="#fff"
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -109,7 +96,7 @@
         />
 
     <LinearLayout
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
@@ -129,7 +116,8 @@
             android:layout_height="30dp"
             android:layout_weight="2"
             android:text="@string/registrasi"
-            android:textColor="@color/blackdop"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
             android:id="@+id/registernow"
             android:textSize="13sp"
             />

@@ -9,7 +9,7 @@
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         app:fillColor="#FFFFFFFF"
         app:pageColor="#00000000"
         app:radius="6dp"
@@ -44,9 +44,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:textColor="#0066ff"
         android:textAlignment="center"
-        android:id="@+id/txt_linkdg"/>
-
+        android:id="@+id/txt_linkdg"
+        android:text="www.dgregulations.com"
+        android:autoLink="all"
+        android:linksClickable="true"
+        />
 
 </LinearLayout>

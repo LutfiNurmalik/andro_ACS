@@ -66,8 +66,6 @@ public class SegregationAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segregation);
 
-        isi_web = findViewById(R.id.isi_web2);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,14 +81,18 @@ public class SegregationAct extends AppCompatActivity {
 //        judul = intent.getStringExtra("judul");
 //        konten = intent.getStringExtra("konten");
         judulTV = (TextView) findViewById(R.id.judul);
+        isi_web = findViewById(R.id.isi_web2);
 //        kontenTV = (TextView) findViewById(R.id.isi);
 //        judulTV.setText(judul);
 //        kontenTV.setText(Html.fromHtml(konten, new ImageGetter(this), null));
 //        final String mimeType = "text/html";
 //        final String encoding = "UTF-8";
+
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-
+        //supaya bisa di zoom
+        isi_web.getSettings().setBuiltInZoomControls(true);
+//        isi_web.getSettings().setUseWideViewPort(true);
 
 
         requestQueue = Volley.newRequestQueue(SegregationAct.this);
@@ -112,7 +114,7 @@ public class SegregationAct extends AppCompatActivity {
                         list_data.add(map);
                     }
                     judulTV.setText(list_data.get(0).get("judul"));
-                    isi_web.loadDataWithBaseURL("", konten, mimeType, encoding, "");
+                    isi_web.loadDataWithBaseURL("konten", list_data.get(0).get("konten"), mimeType, encoding, "");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

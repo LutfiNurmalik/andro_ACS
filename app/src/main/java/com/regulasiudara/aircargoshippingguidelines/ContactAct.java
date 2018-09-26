@@ -3,6 +3,7 @@ package com.regulasiudara.aircargoshippingguidelines;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,11 +52,17 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
         if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
-            Toast.makeText(context, "PERIKSA KONEKSI INTERNET ANDA!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Check Your Internet Connection!!!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
     }
+
+    String username, email, phone;
+    SharedPreferences sharedpreferences;
+    public static final String TAG_USERNAME = "username";
+    public static final String TAG_EMAIL = "email";
+    public static final String TAG_PHONE = "phone";
 
     //input database
     ProgressDialog pDialog;
@@ -88,6 +96,22 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
+        TextView txt_usernamecontact = (TextView) findViewById(R.id.txt_usernamecontact);
+        TextView txt_emailcontact = (TextView) findViewById(R.id.txt_emailcontact);
+        TextView txt_phonecontact = (TextView) findViewById(R.id.txt_phonecontact);
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+        username = getIntent().getStringExtra(TAG_USERNAME);
+        email = getIntent().getStringExtra(TAG_EMAIL);
+        phone = getIntent().getStringExtra(TAG_PHONE);
+
+        navUsername.setText("Username : " + username);
+        txt_usernamecontact.setText(username);
+        txt_emailcontact.setText(email);
+        txt_phonecontact.setText(phone);
+
         articleModelList = new ArrayList<>();
 //        Button btn_contact = (Button) findViewById(R.id.btn_contact);
 //        btn_contact.setOnClickListener(this);
@@ -104,9 +128,12 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
         }
 
         btn_contact = (Button) findViewById(R.id.btn_contact);
-        txt_username = (EditText) findViewById(R.id.txt_usernameregis);
-        txt_email = (EditText) findViewById(R.id.txt_email);
-        txt_phone = (EditText) findViewById(R.id.txt_phone);
+//        txt_username = (TextView) findViewById(R.id.txt_usernamecontact);
+//        txt_email = (TextView) findViewById(R.id.txt_emailcontact);
+//        txt_phone = (TextView) findViewById(R.id.txt_phonecontact);
+//        txt_username.setText(username);
+//        txt_email.setText(email);
+//        txt_phone.setText(phone);
         txt_pesan = (EditText) findViewById(R.id.txt_pesan);
 
         btn_contact.setOnClickListener(new View.OnClickListener() {
@@ -173,10 +200,10 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
 
                         Toast.makeText(getApplicationContext(),
                                 jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
-
-                        txt_username.setText("");
-                        txt_email.setText("");
-                        txt_phone.setText("");
+//
+//                        txt_username.setText("");
+//                        txt_email.setText("");
+//                        txt_phone.setText("");
                         txt_pesan.setText("");
 
                     } else {
@@ -249,8 +276,14 @@ public class ContactAct extends AppCompatActivity implements NavigationView.OnNa
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-//            Intent intent6 = new Intent(DangerousGoodsAct.this, AboutUsActivity.class);
-//            startActivity(intent6);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(Login.session_status, false);
+            editor.putString(TAG_USERNAME, null);
+            editor.commit();
+
+            Intent intent = new Intent(ContactAct.this, Login.class);
+            finish();
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

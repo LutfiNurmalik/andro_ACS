@@ -48,6 +48,9 @@ public class Login extends AppCompatActivity {
     private static final String TAG_MESSAGE = "message";
 
     public final static String TAG_USERNAME = "username";
+//    public final static String TAG_EMAIL = "email";
+//    public final static String TAG_PHONE = "phone";
+
 //    public final static String TAG_ID = "id";
 
     String tag_json_obj = "json_obj_req";
@@ -85,12 +88,11 @@ public class Login extends AppCompatActivity {
         username = sharedpreferences.getString(TAG_USERNAME, null);
 
         if (session) {
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            intent.putExtra(TAG_USERNAME, username);
+            Intent intent1 = new Intent(Login.this, MainActivity.class);
+            intent1.putExtra(TAG_USERNAME, username);
             finish();
-            startActivity(intent);
+            startActivity(intent1);
         }
-
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +112,7 @@ public class Login extends AppCompatActivity {
                     }
                 } else {
                     // Prompt user to enter credentials
-                    Toast.makeText(getApplicationContext() ,"Kolom tidak boleh kosong", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext() ,"Column cannot be empty", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -148,6 +150,8 @@ public class Login extends AppCompatActivity {
                     // Check for error node in json
                     if (success == 1) {
                         String username = jObj.getString(TAG_USERNAME);
+//                        String email = jObj.getString(TAG_EMAIL);
+//                        String phone = jObj.getString(TAG_PHONE);
 
                         Log.e("Successfully Login!", jObj.toString());
 
@@ -164,6 +168,15 @@ public class Login extends AppCompatActivity {
                         intent.putExtra(TAG_USERNAME, username);
                         finish();
                         startActivity(intent);
+//
+//                        //memanggil contact
+//                        Intent intentkontak = new Intent(Login.this, ContactAct.class);
+//                        intentkontak.putExtra(TAG_USERNAME, username);
+//                        intentkontak.putExtra(TAG_EMAIL, email);
+//                        intentkontak.putExtra(TAG_PHONE, phone);
+//                        finish();
+//                        startActivity(intentkontak);
+
                     } else {
                         Toast.makeText(getApplicationContext(),
                                 jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
@@ -222,11 +235,15 @@ public class Login extends AppCompatActivity {
             return;
         }
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this,"Tekan Dua Kali Untuk Keluar",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Press twice to exit",Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 doubleBackToExitPressedOnce = false;
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         },2000);
     }

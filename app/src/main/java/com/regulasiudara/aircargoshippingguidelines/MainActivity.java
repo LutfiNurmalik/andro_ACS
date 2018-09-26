@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
 
     private RecyclerView recyclerView;
@@ -51,18 +52,19 @@ public class MainActivity extends AppCompatActivity
     private Context context = MainActivity.this;
     List<ArticleModel> articleModelList;
 
-//    private ProgressDialog pDialog;
+    //    private ProgressDialog pDialog;
     private static String TAG = MainActivity.class.getSimpleName();
     TextView judul, txt_username;
     ImageView header;
     String username;
-    SharedPreferences sharedpreferences;
     public static final String TAG_USERNAME = "username";
+    SharedPreferences sharedpreferences;
+
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
         if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
-            Toast.makeText(context, "PERIKSA KONEKSI INTERNET ANDA!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Check Your Internet Connection!!!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity
 
     //fungsi carousel
     CarouselView carouselView;
-    int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4, R.drawable.slider5, R.drawable.slider6, R.drawable.slider7};
+    int[] sampleImages = {R.drawable.carslide1, R.drawable.carslide2, R.drawable.carslide3, R.drawable.carslide4, R.drawable.carslide5};
 
 
     @Override
@@ -93,21 +95,26 @@ public class MainActivity extends AppCompatActivity
         TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
         judul = (TextView) findViewById(R.id.judul);
-
-        TextView linkdg = findViewById(R.id.txt_linkdg);
-        linkdg.setText( Html.fromHtml("<font color=#0066ff><a href=\"http://www.dgregulations.com\">www.dgregulations.com</a></font>"));
-        linkdg.setMovementMethod(LinkMovementMethod.getInstance());
-
+//
+//        TextView linkdg = findViewById(R.id.txt_linkdg);
+//        linkdg.setText( Html.fromHtml("<font color=#0066ff><a href=\"http://www.dgregulations.com\">www.dgregulations.com</a></font>"));
+//        linkdg.setMovementMethod(LinkMovementMethod.getInstance());
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
         navUsername.setText(username);
 
+//        txt_username = (TextView) findViewById(R.id.txt_account);
+//
+//        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+//        username = getIntent().getStringExtra(TAG_USERNAME);
+//        txt_username.setText("USERNAME : " + username);
 
         //fungsi carousel
         carouselView = findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
+        carouselView.setOnClickListener(this);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -130,21 +137,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         AlertDialog.Builder keluar = new AlertDialog.Builder(MainActivity.this);
-        keluar.setMessage("Anda yakin mau keluar?").setCancelable(false)
-                .setPositiveButton("Ya", new AlertDialog.OnClickListener(){
+        keluar.setMessage("Are you want to exit?").setCancelable(false)
+                .setPositiveButton("Yes", new AlertDialog.OnClickListener(){
                     public void onClick(DialogInterface arg0, int arg1){
                         Intent intent = new Intent(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
-                }).setNegativeButton("Tidak", new AlertDialog.OnClickListener(){
+                }).setNegativeButton("No", new AlertDialog.OnClickListener(){
             public void onClick(DialogInterface dialog, int arg1){
                 dialog.cancel();
             }
         });
         AlertDialog dialog1 = keluar.create();
-        dialog1.setTitle("Keluar");
+        dialog1.setTitle("Exit");
         dialog1.show();
     }
     @Override
@@ -177,19 +184,26 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_dg:
                 Intent intent2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
+                intent2.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent2);
                 break;
             case R.id.nav_psn:
                 Intent intent3 = new Intent(MainActivity.this, ProperShippingNameAct.class);
-                startActivity(intent3);
+                intent3.putExtra(TAG_USERNAME, username);
                 finish();
+                startActivity(intent3);
                 break;
             case R.id.nav_pi:
                 Intent intent4 = new Intent(MainActivity.this, PackingInstructionAct.class);
+                intent4.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent4);
                 break;
             case R.id.nav_limitation:
                 Intent intent5 = new Intent(MainActivity.this, LimitationAct.class);
+                intent5.putExtra(TAG_USERNAME, username);
+                finish();
                 startActivity(intent5);
                 break;
 //            case R.id.nav_about:
@@ -205,6 +219,32 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.drawable.carslide2:
+                Intent intentslide2 = new Intent(MainActivity.this, DangerousGoodsAct.class);
+                intentslide2.putExtra(TAG_USERNAME, username);
+                finish();
+                startActivity(intentslide2);
+            case R.drawable.carslide3:
+                Intent intentslide3 = new Intent(MainActivity.this, ProperShippingNameAct.class);
+                intentslide3.putExtra(TAG_USERNAME, username);
+                finish();
+                startActivity(intentslide3);
+            case R.drawable.carslide4:
+                Intent intentslide4 = new Intent(MainActivity.this, PackingInstructionAct.class);
+                intentslide4.putExtra(TAG_USERNAME, username);
+                finish();
+                startActivity(intentslide4);
+            case R.drawable.carslide5:
+                Intent intentslide5 = new Intent(MainActivity.this, LimitationAct.class);
+                intentslide5.putExtra(TAG_USERNAME, username);
+                finish();
+                startActivity(intentslide5);
+        }
     }
 //    private void showpDialog() {
 //        if (!pDialog.isShowing())

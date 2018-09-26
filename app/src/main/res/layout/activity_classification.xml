@@ -44,14 +44,6 @@
         android:gravity="center_horizontal"
         android:background="#fff">
 
-        <!--<ImageView-->
-            <!--android:id="@+id/gambarItem"-->
-            <!--android:layout_width="50sp"-->
-            <!--android:layout_height="50sp"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:scaleType="centerCrop"-->
-            <!--android:src="@drawable/ic_nav_dg"/>-->
-
         <TextView
             android:id="@+id/judul"
             android:layout_width="wrap_content"
