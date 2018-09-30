@@ -103,6 +103,7 @@ public class DangerousGoodsAct extends AppCompatActivity implements NavigationVi
         } else {
 //            super.onBackPressed();
             Intent home = new Intent(DangerousGoodsAct.this, MainActivity.class);
+            home.putExtra(TAG_USERNAME, username);
             finish();
             startActivity(home);
         }

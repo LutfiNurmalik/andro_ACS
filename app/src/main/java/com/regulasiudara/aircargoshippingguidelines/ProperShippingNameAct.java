@@ -171,6 +171,7 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
         } else {
 //            super.onBackPressed();
             Intent home = new Intent(ProperShippingNameAct.this, MainActivity.class);
+            home.putExtra(TAG_USERNAME, username);
             finish();
             startActivity(home);
         }
