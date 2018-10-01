@@ -11,6 +11,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,12 +43,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PackingInstructionAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
+public class PackingInstructionAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
 
     private String urlJsonObj = Server.URL +"getlist_pi.php";
     private String url_cari = Server.URL +"cari_data.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
+
+    List<DataModel> listData;
+    ArticleAdapter adapter_cari;
+
     private Context context = PackingInstructionAct.this;
     List<ArticleModel> articleModelList;
     private ProgressDialog pDialog;
@@ -60,6 +65,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     SharedPreferences sharedpreferences;
     public static final String TAG_USERNAME = "username";
     String tag_json_obj = "json_obj_req";
+
 
     public static final String TAG_NAMA = "judul";
     public static final String TAG_RESULTS = "results";
@@ -97,9 +103,28 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
 
+        RecyclerView recyclerCari = findViewById(R.id.recycler_view);
+
+//        listData = new ArrayList<>();
+//        adapter_cari = new ArticleAdapter(PackingInstructionAct.this, listData);
+//        recyclerCari.setAdapter(adapter_cari);
+
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
         navUsername.setText(username);
+
+        final SwipeRefreshLayout swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+
+        swipe.setOnRefreshListener(this);
+
+        swipe.post(new Runnable() {
+                       @Override
+                       public void run() {
+                           swipe.setRefreshing(true);
+                           makeJsonObjectRequest();
+                       }
+                   }
+        );
 
         judul = (TextView) findViewById(R.id.judul);
         pDialog = new ProgressDialog(this);
@@ -172,6 +197,11 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     }
 
     @Override
+    public void onRefresh() {
+        makeJsonObjectRequest();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
@@ -202,7 +232,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
 
                     if (value == 1) {
                         articleModelList.clear();
-                        adapter.notifyDataSetChanged();
+                        adapter_cari.notifyDataSetChanged();
 
                         String getObject = jObj.getString(TAG_RESULTS);
                         JSONArray jsonArray = new JSONArray(getObject);
@@ -210,11 +240,11 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject obj = jsonArray.getJSONObject(i);
 
-                            ArticleModel data = new ArticleModel();
+                            DataModel articleData = new DataModel();
 
-                            data.setJudul(obj.getString(TAG_NAMA));
+                            articleData.setJudul(obj.getString(TAG_NAMA));
 
-                            articleModelList.add(data);
+                            listData.add(articleData);
                         }
 
                     } else {
@@ -226,7 +256,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
                     e.printStackTrace();
                 }
 
-                adapter.notifyDataSetChanged();
+                adapter_cari.notifyDataSetChanged();
                 pDialog.dismiss();
             }
         }, new Response.ErrorListener() {

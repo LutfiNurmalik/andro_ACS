@@ -15,6 +15,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     List<ArticleModel> list;
     Context context;
 
+    private Activity activity;
+    private LayoutInflater inflater;
+    private List<DataModel> item;
+
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView headerItem;
         ViewHolder(View itemView){
@@ -22,6 +26,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             headerItem = (TextView) itemView.findViewById(R.id.headerItem);
         }
     }
+
     public ArticleAdapter(List<ArticleModel> list, Context context){
         this.list = list;
         this.context = context;
@@ -47,15 +52,16 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    class Adapter extends BaseAdapter{
+
+    public static class Adapter extends BaseAdapter {
         private Activity activity;
         private LayoutInflater inflater;
-        private List<DataModel> item;
+        private List<ArticleModel> item;
 
-    public Adapter(Activity activity, List<DataModel> item) {
-        this.activity = activity;
-        this.item = item;
-    }
+        public Adapter(Activity activity, List<ArticleModel> item) {
+            this.activity = activity;
+            this.item = item;
+        }
 
     @Override
     public int getCount() {
@@ -84,9 +90,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
         TextView txt_nama = (TextView) convertView.findViewById(R.id.headerItem);
 
-        txt_nama.setText(item.get(position).getNama());
+        txt_nama.setText(item.get(position).getJudul());
 
         return convertView;
     }
-    }
+}
 }

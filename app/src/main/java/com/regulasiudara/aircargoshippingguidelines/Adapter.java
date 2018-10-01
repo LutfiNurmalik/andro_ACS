@@ -47,7 +47,7 @@ public class Adapter extends BaseAdapter {
 
         TextView txt_nama = (TextView) convertView.findViewById(R.id.headerItem);
 
-        txt_nama.setText(item.get(position).getNama());
+        txt_nama.setText(item.get(position).getJudul());
 
         return convertView;
     }
