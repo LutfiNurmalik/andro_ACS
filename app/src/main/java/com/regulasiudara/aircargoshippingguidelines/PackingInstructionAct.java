@@ -201,16 +201,16 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         makeJsonObjectRequest();
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        cariData(query);
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//        cariData(query);
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        return false;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
@@ -382,5 +382,16 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     private void hidepDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        cariData(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

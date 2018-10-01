@@ -47,7 +47,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //private String urlJsonObj = "https://duniasehat.000webhostapp.com/artikel.php";
+
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
     private Context context = MainActivity.this;
