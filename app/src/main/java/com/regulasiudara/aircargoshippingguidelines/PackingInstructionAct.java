@@ -23,7 +23,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,27 +45,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class PackingInstructionAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
 
     private String urlJsonObj = Server.URL +"getlist_pi.php";
-    private String url_cari = Server.URL +"cari_data.php";
+    private String cari_pi = Server.URL +"cari_pi.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
 
+
     List<DataModel> listData;
     ArticleAdapter adapter_cari;
+    CariAdapter cariAdapter;
 
     private Context context = PackingInstructionAct.this;
     List<ArticleModel> articleModelList;
+    SwipeRefreshLayout swipe;
     private ProgressDialog pDialog;
-    private static String TAG = PackingInstructionAct.class.getSimpleName();
+    private String TAG = PackingInstructionAct.class.getSimpleName();
     TextView judul, subJudul;
     ImageView header;
 
     String username;
     SharedPreferences sharedpreferences;
     public static final String TAG_USERNAME = "username";
+
     String tag_json_obj = "json_obj_req";
 
 
@@ -86,6 +93,24 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packing_instruction);
+
+        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        adapter = new ArticleAdapter(articleModelList, context);
+        recyclerView.setAdapter(adapter);
+
+        swipe.setOnRefreshListener(this);
+//        swipe.setRefreshing(false);
+
+        swipe.post(new Runnable() {
+                       @Override
+                       public void run() {
+                           swipe.setRefreshing(true);
+                           makeJsonObjectRequest();
+                       }
+                   }
+        );
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
 
@@ -133,21 +158,31 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         showpDialog();
         makeJsonObjectRequest();
     }
+
     private void makeJsonObjectRequest() {
+
+        articleModelList.clear();
+        adapter.notifyDataSetChanged();
+        swipe.setRefreshing(false);
+
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 urlJsonObj, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
+
                 try {
                     JSONArray result = response.getJSONArray("result");
                     for (int i = 0; i < result.length(); i++) {
                         JSONObject c = result.getJSONObject(i);
+
                         ArticleModel articleData = new ArticleModel();
+
                         articleData.judul = c.getString("judul");
                         articleData.link = c.getString("link");
                         articleData.konten = c.getString("konten");
+
                         articleModelList.add(articleData);
                     }
                     recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -179,21 +214,13 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
             public void onErrorResponse(VolleyError error) {
                 hidepDialog();
                 isOnline();
+
+//                VolleyLog.e(TAG, "Error: " + error.getMessage());
+//                Toast.makeText(PackingInstructionAct.this, error.getMessage(), Toast.LENGTH_LONG).show();
+//                swipe.setRefreshing(false);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq);
-    }
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-//            super.onBackPressed();
-            Intent home = new Intent(PackingInstructionAct.this, MainActivity.class);
-            finish();
-            startActivity(home);
-        }
     }
 
     @Override
@@ -201,9 +228,20 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         makeJsonObjectRequest();
     }
 
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//        cariData(query);
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        return false;
+//    }
+
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.main_cari, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setQueryHint(getString(R.string.type_name));
@@ -212,14 +250,13 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         return true;
     }
 
-
     private void cariData(final String keyword) {
         pDialog = new ProgressDialog(PackingInstructionAct.this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, url_cari, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, cari_pi, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -233,16 +270,18 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
                     if (value == 1) {
                         articleModelList.clear();
                         adapter_cari.notifyDataSetChanged();
+                        cariAdapter.notifyDataSetChanged();
 
-                        String getObject = jObj.getString(TAG_RESULTS);
+
+                        String getObject = jObj.getString("result");
                         JSONArray jsonArray = new JSONArray(getObject);
 
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject obj = jsonArray.getJSONObject(i);
+                            JSONObject c = jsonArray.getJSONObject(i);
 
                             DataModel articleData = new DataModel();
 
-                            articleData.setJudul(obj.getString(TAG_NAMA));
+                            articleData.setJudul(c.getString(TAG_NAMA));
 
                             listData.add(articleData);
                         }
@@ -282,28 +321,44 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
 
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+//            super.onBackPressed();
+            Intent home = new Intent(PackingInstructionAct.this, MainActivity.class);
+            home.putExtra(TAG_USERNAME, username);
+            finish();
+            startActivity(home);
+        }
+    }
+
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.main, menu);
 //        return true;
 //    }
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.action_settings) {
-//            SharedPreferences.Editor editor = sharedpreferences.edit();
-//            editor.putBoolean(Login.session_status, false);
-//            editor.putString(TAG_USERNAME, null);
-//            editor.commit();
-//
-//            Intent intent = new Intent(PackingInstructionAct.this, Login.class);
-//            finish();
-//            startActivity(intent);
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(Login.session_status, false);
+            editor.putString(TAG_USERNAME, null);
+            editor.commit();
+
+            Intent intent = new Intent(PackingInstructionAct.this, Login.class);
+            finish();
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

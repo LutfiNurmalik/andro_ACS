@@ -23,23 +23,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registrasi" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Registrasi"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Login" />
-        <activity android:name=".DangerousGoodsAct" />
-        <activity android:name=".ClassificationAct" />
+        <activity android:name=".DangerousGoodsAct"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ClassificationAct"
+            android:screenOrientation="portrait"/>
         <activity android:name=".SegregationAct" />
         <activity android:name=".Artikel_Classification" />
-        <activity android:name=".PackingInstructionAct" />
+        <activity android:name=".PackingInstructionAct"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ArtikelPackingInstruction" />
-        <activity android:name=".LimitationAct" />
-        <activity android:name=".LimCountry" />
+        <activity android:name=".LimitationAct"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LimCountry"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ArtikelLimCountry" />
-        <activity android:name=".LimAirline" />
+        <activity android:name=".LimAirline"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ArtikelLimAirline" />
-        <activity android:name=".ProperShippingNameAct" />
-        <activity android:name=".AboutAct"></activity>
-        <activity android:name=".ContactAct"></activity>
+        <activity android:name=".ProperShippingNameAct"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AboutAct"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ContactAct"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

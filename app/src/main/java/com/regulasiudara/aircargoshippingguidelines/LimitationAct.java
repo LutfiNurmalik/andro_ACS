@@ -68,6 +68,7 @@ public class LimitationAct extends AppCompatActivity implements NavigationView.O
             } else {
 //                super.onBackPressed();
                 Intent home = new Intent(LimitationAct.this, MainActivity.class);
+                home.putExtra(TAG_USERNAME, username);
                 finish();
                 startActivity(home);
             }

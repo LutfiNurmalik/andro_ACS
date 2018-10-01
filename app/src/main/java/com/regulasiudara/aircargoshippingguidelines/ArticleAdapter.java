@@ -12,12 +12,51 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
+//    private Activity activity;
+//    private LayoutInflater inflater;
     List<ArticleModel> list;
     Context context;
+
 
     private Activity activity;
     private LayoutInflater inflater;
     private List<DataModel> item;
+
+//    public ArticleAdapter(Activity activity, List<ArticleModel> list) {
+//        this.activity = activity;
+//        this.list = list;
+//    }
+
+//    @Override
+//    public int getCount() {
+//        return list.size();
+//    }
+//
+//    @Override
+//    public Object getItem(int location) {
+//        return list.get(location);
+//    }
+//
+//    @Override
+//    public long getItemId(int position) {
+//        return position;
+//    }
+//
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        if (inflater == null)
+//            inflater = (LayoutInflater) activity
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//
+//        if (convertView == null)
+//            convertView = inflater.inflate(R.layout.artikel_list, null);
+//
+//        TextView txt_cari = (TextView) convertView.findViewById(R.id.headerItem);
+//
+//        txt_cari.setText(list.get(position).link);
+//
+//        return convertView;
+//    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView headerItem;
@@ -30,6 +69,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     public ArticleAdapter(List<ArticleModel> list, Context context){
         this.list = list;
         this.context = context;
+//        this.activity = activity;
     }
     @Override
     public ArticleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
