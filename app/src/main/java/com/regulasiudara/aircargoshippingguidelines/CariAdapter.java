@@ -46,9 +46,9 @@ public class CariAdapter extends BaseAdapter {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.artikel_list, null);
 
-//        TextView txt_nama = (TextView) convertView.findViewById(R.id.txt_nama);
-//
-//        txt_nama.setText(item.get(position).getNama());
+        TextView txt_cari = (TextView) convertView.findViewById(R.id.headerItem);
+
+        txt_cari.setText(item.get(position).link);
 
         return convertView;
     }

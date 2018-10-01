@@ -1,17 +1,58 @@
 package com.regulasiudara.aircargoshippingguidelines;
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
+//    private Activity activity;
+//    private LayoutInflater inflater;
     List<ArticleModel> list;
     Context context;
+
+//    public ArticleAdapter(Activity activity, List<ArticleModel> list) {
+//        this.activity = activity;
+//        this.list = list;
+//    }
+
+//    @Override
+//    public int getCount() {
+//        return list.size();
+//    }
+//
+//    @Override
+//    public Object getItem(int location) {
+//        return list.get(location);
+//    }
+//
+//    @Override
+//    public long getItemId(int position) {
+//        return position;
+//    }
+//
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        if (inflater == null)
+//            inflater = (LayoutInflater) activity
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//
+//        if (convertView == null)
+//            convertView = inflater.inflate(R.layout.artikel_list, null);
+//
+//        TextView txt_cari = (TextView) convertView.findViewById(R.id.headerItem);
+//
+//        txt_cari.setText(list.get(position).link);
+//
+//        return convertView;
+//    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView headerItem;
         ViewHolder(View itemView){
@@ -22,6 +63,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     public ArticleAdapter(List<ArticleModel> list, Context context){
         this.list = list;
         this.context = context;
+//        this.activity = activity;
     }
     @Override
     public ArticleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

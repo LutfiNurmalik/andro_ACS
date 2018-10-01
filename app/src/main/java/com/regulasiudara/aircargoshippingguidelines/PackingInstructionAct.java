@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
     private String cari_pi = Server.URL +"cari_pi.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
+    CariAdapter cariAdapter;
     private Context context = PackingInstructionAct.this;
     List<ArticleModel> articleModelList;
     SwipeRefreshLayout swipe;
@@ -91,7 +93,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         recyclerView.setAdapter(adapter);
 
         swipe.setOnRefreshListener(this);
-        swipe.setRefreshing(false);
+//        swipe.setRefreshing(false);
 
         swipe.post(new Runnable() {
                        @Override
@@ -240,9 +242,9 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
 
                     if (value == 1) {
                         articleModelList.clear();
-                        adapter.notifyDataSetChanged();
+                        cariAdapter.notifyDataSetChanged();
 
-                        String getObject = jObj.getString(TAG_RESULTS);
+                        String getObject = jObj.getString("result");
                         JSONArray jsonArray = new JSONArray(getObject);
 
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -256,20 +258,6 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
 
                             articleModelList.add(articleData);
                         }
-//                        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//                        adapter = new ArticleAdapter(articleModelList, context);
-//                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//                        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//                        recyclerView.setAdapter(adapter);
-//                        recyclerView.addOnItemTouchListener(new CustomTouchListener(context, new onItemClickListener() {
-//                            @Override
-//                            public void onClick(View view, int index) {
-//                                Intent intent = new Intent(context, ArtikelPackingInstruction.class);
-//                                intent.putExtra("judul", articleModelList.get(index).judul);
-//                                intent.putExtra("konten", articleModelList.get(index).konten);
-//                                context.startActivity(intent);
-//                            }
-//                        }));
 
                     } else {
                         Toast.makeText(getApplicationContext(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_SHORT).show();
