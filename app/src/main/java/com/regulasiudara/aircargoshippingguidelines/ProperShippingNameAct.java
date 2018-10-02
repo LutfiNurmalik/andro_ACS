@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +96,7 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
             @Override
             public void onClick(View view) {
 
-                psn = etPSN.getText().toString().trim();
+                psn = etPSN.getText().toString();
 
                 getSqlDetails();
             }
@@ -102,14 +105,18 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
 
 
     private void getSqlDetails() {
-
-        String url= Server.URL + "getlist_psn.php?psn="+psn;
+        String encodedUrl = null;
+        try {
+            encodedUrl = URLEncoder.encode(psn, "utf-8");
+        String url= Server.URL + "getlist_psn.php?psn="+encodedUrl;
+            Log.v("coba2",url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            Log.v("cobaan", response);
 
                             JSONArray jsonarray = new JSONArray(response);
 
@@ -161,7 +168,9 @@ public class ProperShippingNameAct extends AppCompatActivity implements Navigati
 
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
-    }
+    } catch (UnsupportedEncodingException e) {
+        e.printStackTrace();
+    }}
 
     @Override
     public void onBackPressed() {
