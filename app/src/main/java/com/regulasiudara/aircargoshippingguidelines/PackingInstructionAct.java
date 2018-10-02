@@ -50,13 +50,12 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
 
     private String urlJsonObj = Server.URL +"getlist_pi.php";
-    private String cari_pi = Server.URL +"cari_pi.php";
+    private String cari_pi = Server.URL +"cari_data.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
 
 
     List<DataModel> listData;
-    ArticleAdapter adapter_cari;
     CariAdapter cariAdapter;
 
     private Context context = PackingInstructionAct.this;
@@ -99,6 +98,8 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
 
         adapter = new ArticleAdapter(articleModelList, context);
         recyclerView.setAdapter(adapter);
+
+//        cariAdapter = new CariAdapter()
 
         swipe.setOnRefreshListener(this);
 //        swipe.setRefreshing(false);
@@ -269,7 +270,6 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
 
                     if (value == 1) {
                         articleModelList.clear();
-                        adapter_cari.notifyDataSetChanged();
                         cariAdapter.notifyDataSetChanged();
 
 
@@ -295,7 +295,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
                     e.printStackTrace();
                 }
 
-                adapter_cari.notifyDataSetChanged();
+                cariAdapter.notifyDataSetChanged();
                 pDialog.dismiss();
             }
         }, new Response.ErrorListener() {
