@@ -21,6 +21,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
@@ -46,38 +47,26 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PackingInstructionAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
+public class PackingInstructionAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String urlJsonObj = Server.URL +"getlist_pi.php";
-    private String cari_pi = Server.URL +"cari_pi.php";
+    //    private String cari_pi = Server.URL +"cari_pi.php";
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
-
-
-    List<DataModel> listData;
-    ArticleAdapter adapter_cari;
-    CariAdapter cariAdapter;
-
     private Context context = PackingInstructionAct.this;
     List<ArticleModel> articleModelList;
-    SwipeRefreshLayout swipe;
     private ProgressDialog pDialog;
-    private String TAG = PackingInstructionAct.class.getSimpleName();
+    private static String TAG = PackingInstructionAct.class.getSimpleName();
     TextView judul, subJudul;
     ImageView header;
+
+//    SwipeRefreshLayout swipe;
 
     String username;
     SharedPreferences sharedpreferences;
     public static final String TAG_USERNAME = "username";
 
     String tag_json_obj = "json_obj_req";
-
-
-    public static final String TAG_NAMA = "judul";
-    public static final String TAG_RESULTS = "results";
-    public static final String TAG_MESSAGE = "message";
-    public static final String TAG_VALUE = "value";
 
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -94,23 +83,16 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packing_instruction);
 
-        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        adapter = new ArticleAdapter(articleModelList, context);
-        recyclerView.setAdapter(adapter);
-
-        swipe.setOnRefreshListener(this);
-//        swipe.setRefreshing(false);
-
-        swipe.post(new Runnable() {
-                       @Override
-                       public void run() {
-                           swipe.setRefreshing(true);
-                           makeJsonObjectRequest();
-                       }
-                   }
-        );
+//        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+//        swipe.setOnRefreshListener(this);
+//        swipe.post(new Runnable() {
+//                       @Override
+//                       public void run() {
+//                           swipe.setRefreshing(true);
+//                           makeJsonObjectRequest();
+//                       }
+//                   }
+//        );
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
 
@@ -128,28 +110,9 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         TextView navUsername = (TextView) headerView.findViewById(R.id.txt_account);
         articleModelList = new ArrayList<>();
 
-        RecyclerView recyclerCari = findViewById(R.id.recycler_view);
-
-//        listData = new ArrayList<>();
-//        adapter_cari = new ArticleAdapter(PackingInstructionAct.this, listData);
-//        recyclerCari.setAdapter(adapter_cari);
-
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         username = getIntent().getStringExtra(TAG_USERNAME);
         navUsername.setText(username);
-
-        final SwipeRefreshLayout swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-
-        swipe.setOnRefreshListener(this);
-
-        swipe.post(new Runnable() {
-                       @Override
-                       public void run() {
-                           swipe.setRefreshing(true);
-                           makeJsonObjectRequest();
-                       }
-                   }
-        );
 
         judul = (TextView) findViewById(R.id.judul);
         pDialog = new ProgressDialog(this);
@@ -161,9 +124,7 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
 
     private void makeJsonObjectRequest() {
 
-        articleModelList.clear();
-        adapter.notifyDataSetChanged();
-        swipe.setRefreshing(false);
+//        swipe.setRefreshing(false);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 urlJsonObj, null, new Response.Listener<JSONObject>() {
@@ -171,18 +132,14 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
-
                 try {
                     JSONArray result = response.getJSONArray("result");
                     for (int i = 0; i < result.length(); i++) {
                         JSONObject c = result.getJSONObject(i);
-
                         ArticleModel articleData = new ArticleModel();
-
                         articleData.judul = c.getString("judul");
                         articleData.link = c.getString("link");
                         articleData.konten = c.getString("konten");
-
                         articleModelList.add(articleData);
                     }
                     recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -214,113 +171,15 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
             public void onErrorResponse(VolleyError error) {
                 hidepDialog();
                 isOnline();
-
-//                VolleyLog.e(TAG, "Error: " + error.getMessage());
-//                Toast.makeText(PackingInstructionAct.this, error.getMessage(), Toast.LENGTH_LONG).show();
-//                swipe.setRefreshing(false);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
 
-    @Override
-    public void onRefresh() {
-        makeJsonObjectRequest();
-    }
-
 //    @Override
-//    public boolean onQueryTextSubmit(String query) {
-//        cariData(query);
-//        return false;
+//    public void onRefresh() {
+//        makeJsonObjectRequest();
 //    }
-//
-//    @Override
-//    public boolean onQueryTextChange(String newText) {
-//        return false;
-//    }
-
-    @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.main_cari, menu);
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setQueryHint(getString(R.string.type_name));
-        searchView.setIconified(true);
-        searchView.setOnQueryTextListener(this);
-        return true;
-    }
-
-    private void cariData(final String keyword) {
-        pDialog = new ProgressDialog(PackingInstructionAct.this);
-        pDialog.setCancelable(false);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-        StringRequest strReq = new StringRequest(Request.Method.POST, cari_pi, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.e("Response: ", response.toString());
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-
-                    int value = jObj.getInt(TAG_VALUE);
-
-                    if (value == 1) {
-                        articleModelList.clear();
-                        adapter_cari.notifyDataSetChanged();
-                        cariAdapter.notifyDataSetChanged();
-
-
-                        String getObject = jObj.getString("result");
-                        JSONArray jsonArray = new JSONArray(getObject);
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject c = jsonArray.getJSONObject(i);
-
-                            DataModel articleData = new DataModel();
-
-                            articleData.setJudul(c.getString(TAG_NAMA));
-
-                            listData.add(articleData);
-                        }
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-                }
-
-                adapter_cari.notifyDataSetChanged();
-                pDialog.dismiss();
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                pDialog.dismiss();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("keyword", keyword);
-
-                return params;
-            }
-
-        };
-
-        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
-    }
 
     @Override
     public void onBackPressed() {
@@ -336,11 +195,11 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -411,14 +270,4 @@ public class PackingInstructionAct extends AppCompatActivity implements Navigati
             pDialog.dismiss();
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        cariData(query);
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
 }
